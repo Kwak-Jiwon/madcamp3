@@ -6,9 +6,11 @@ import ThreeDScroll from './ThreeDScroll';
 function App() {
   return (
     <div className="App">
-      
-      <div className="scroll-container">
-        <ThreeDScroll />
+      <ThreeDScroll />
+      <div className="content-container">
+        <div className="scroll-container">
+          <button className='button'>NEED MORE CASH</button>
+        </div>
       </div>
     </div>
   );

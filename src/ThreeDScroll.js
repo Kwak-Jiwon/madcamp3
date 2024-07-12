@@ -43,14 +43,14 @@ const RotatingAndMovingModel = () => {
     // 매 프레임마다 실행되는 함수입니다.
     if (ref.current) {
       ref.current.rotation.x = scrollY / 700; // 스크롤 위치에 따라 모델의 x축 회전을 조정합니다.
-      ref.current.rotation.z = scrollY / 300; // 스크롤 위치에 따라 모델의 z축 회전을 조정합니다.
+      ref.current.rotation.z = scrollY / 800; // 스크롤 위치에 따라 모델의 z축 회전을 조정합니다.
       ref.current.position.y = scrollY / 400; // 스크롤 위치에 따라 모델의 y축 위치를 조정합니다.
       ref.current.position.z = scrollY / 300; // 스크롤 위치에 따라 모델의 z축 위치를 조정합니다.
       ref.current.position.x = scrollY / 500;
     }
   });
 
-  return <Model ref={ref} scale={0.5} />; // 모델을 반환하며, 스케일을 0.3으로 설정합니다.
+  return <Model ref={ref} scale={0.5} />; // 모델을 반환하며, 스케일을 0.5으로 설정합니다.
 };
 
 // ThreeDScroll 컴포넌트를 정의합니다.
