@@ -3,9 +3,8 @@ import React from 'react';
 
 const Earth = () => {
   return (
-    <div className="earth-container">
+    <div>
       <h1>Welcome to Earth Page</h1>
-      {/* Earth page content */}
     </div>
   );
 };
