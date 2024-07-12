@@ -14,7 +14,7 @@
 }
 
 .scroll-container {
-  height: 200vh; /* 스크롤 높이 설정 */
+  height: 1000vh; /* 스크롤 높이 설정 */
   position: relative;
 }
 
