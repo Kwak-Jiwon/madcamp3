@@ -21,7 +21,7 @@ function Earth() {
 
   const handleRotate = () => {
     if (earthRef.current) {
-      earthRef.current.rotation.z += Math.PI / 4; // 45도 회전
+      earthRef.current.rotation.z += Math.PI / 4; // 45도 회전 중
     }
   };
 
