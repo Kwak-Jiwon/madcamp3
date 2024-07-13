@@ -78,11 +78,12 @@ function Earth() {
               alignItems: 'center',
             }}
           >
-            <h2>Login</h2>
+            <h2>돈 벌기</h2>
             <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-              <input type="text" placeholder="Username" style={{ margin: '10px 0', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }} />
-              <input type="password" placeholder="Password" style={{ margin: '10px 0', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }} />
-              <button type="submit" style={{ padding: '10px', borderRadius: '5px', border: 'none', backgroundColor: '#0f0f0f', color: '#0df', cursor: 'pointer' }}>Login</button>
+              <input type="text" placeholder="행성등록번호" style={{ margin: '10px 0', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }} />
+              <input type="text" placeholder="이름" style={{ margin: '10px 0', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }} />
+              <input type="password" placeholder="비밀번호" style={{ margin: '10px 0', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }} />
+              <button type="submit" style={{ padding: '10px', borderRadius: '5px', border: 'none', backgroundColor: '#0f0f0f', color: '#0df', cursor: 'pointer' }}>노동 시작</button>
             </form>
           </div>
         </div>

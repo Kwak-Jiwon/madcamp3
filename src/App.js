@@ -16,7 +16,8 @@ function MainPage() {
       <ThreeDScroll />
       <div className="content-container">
         <div className="scroll-container">
-          <button className='button' onClick={handleUseHistory}>NEED MORE CASH</button>
+          <button className='button1' onClick={handleUseHistory}>NEED MORE CASH</button>
+          <button className='button2' onClick={handleUseHistory}>SHOP NOW</button>
         </div>
       </div>
     </div>
