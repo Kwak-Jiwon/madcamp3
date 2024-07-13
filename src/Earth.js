@@ -1,28 +1,34 @@
-import React, { useRef } from 'react';
-import { Canvas } from '@react-three/fiber';
+import React, { useRef, useState } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, useGLTF } from '@react-three/drei';
 
-function EarthModel() {
-  const { scene } = useGLTF('/techno.glb'); // 지구본 모델 파일 경로
+function EarthModel({ rotationSpeed }) {
+  const { scene } = useGLTF('/techno.glb');
   const earthRef = useRef();
 
-  // z축 기준으로 지구본을 회전시키는 함수
-  const handleRotate = () => {
+  // Use useFrame to rotate the model incrementally
+  useFrame(() => {
     if (earthRef.current) {
-      earthRef.current.rotation.z += Math.PI / 4; // 45도 회전
+      earthRef.current.rotation.z += rotationSpeed;
     }
-  };
+  });
 
   return <primitive object={scene} ref={earthRef} />;
 }
 
 function Earth() {
-  const earthRef = useRef();
+  const [rotationSpeed, setRotationSpeed] = useState(0); // Initial rotation speed is 0
+  const [clickCount, setClickCount] = useState(0); // State to track button click count
 
   const handleRotate = () => {
-    if (earthRef.current) {
-      earthRef.current.rotation.z += Math.PI / 4; // 45도 회전 중임
-    }
+    // Set the rotation speed for smooth rotation
+    setRotationSpeed(Math.PI / 600); // Rotate at 1 degree per frame
+    // Stop rotation after a short duration (e.g., 1 second)
+    setTimeout(() => {
+      setRotationSpeed(0);
+    }, 1000);
+    // Increment the click count
+    setClickCount(prevCount => prevCount + 1);
   };
 
   return (
@@ -30,15 +36,65 @@ function Earth() {
       <Canvas camera={{ position: [0, 0, 10] }}>
         <ambientLight intensity={4} />
         <directionalLight position={[10, 10, 5]} intensity={1} />
-        <primitive object={useGLTF('/techno.glb').scene} ref={earthRef} />
+        <EarthModel rotationSpeed={rotationSpeed} />
         <OrbitControls enableZoom={false} />
       </Canvas>
       <button
-        style={{ position: 'absolute', top: '20px', left: '20px' }}
+        style={{
+          position: 'absolute',
+          bottom: '8%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          padding: '20px 70px',
+          fontSize: '18px',
+          backgroundColor: '#0f0f0f',
+          color: '#0df',
+          border: '2px solid #0df',
+          borderRadius: '5px',
+          cursor: 'pointer',
+          textTransform: 'uppercase',
+          letterSpacing: '2px',
+          transition: '0.3s',
+          boxShadow: '0 0 10px #0df, 0 0 20px #0df, 0 0 30px #0df',
+        }}
         onClick={handleRotate}
       >
-        Rotate Earth
+        Engine
       </button>
+      <div
+        style={{
+          position: 'absolute',
+          top: '10px',
+          right: '10px',
+          display: 'flex',
+          alignItems: 'center',
+          opacity: 0.7,
+          transition: 'opacity 0.3s',
+        }}
+        className="info-box"
+      >
+        <img src="/unit.png" alt="Example" style={{ width: '100px', marginRight: '10px' }} />
+        <div style={{
+          padding: '10px',
+          backgroundColor: '#222',
+          border: '2px solid #0df',
+          borderRadius: '5px',
+          color: '#fff',
+        }}>
+          Button Clicked: {clickCount} times
+        </div>
+      </div>
+      <style>
+        {`
+          button:hover {
+            box-shadow: 0 0 20px #0df, 0 0 30px #0df, 0 0 40px #0df;
+          }
+
+          .info-box:hover {
+            opacity: 0;
+          }
+        `}
+      </style>
     </div>
   );
 }
