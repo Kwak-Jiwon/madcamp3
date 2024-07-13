@@ -28,7 +28,7 @@ function Earth() {
   return (
     <div style={{ width: '100vw', height: '100vh', overflow: 'hidden', position: 'relative' }}>
       <Canvas camera={{ position: [0, 0, 10] }}>
-        <ambientLight intensity={0.5} />
+        <ambientLight intensity={4} />
         <directionalLight position={[10, 10, 5]} intensity={1} />
         <primitive object={useGLTF('/techno.glb').scene} ref={earthRef} />
         <OrbitControls enableZoom={false} />
