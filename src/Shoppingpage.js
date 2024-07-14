@@ -1,9 +1,9 @@
-// src/ShoppingPage.js
 import React, { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import { useAuth } from './AuthContext';
 import LoginPage from './LoginPage';
+import './ShoppingPage.css';
 
 const RotatingStar = () => {
   const { scene } = useGLTF('/star.glb');
@@ -29,12 +29,23 @@ const ShoppingPage = () => {
         <pointLight position={[-10, -10, 10]} intensity={1} />
         <RotatingStar />
       </Canvas>
-      <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}>
-        <h1 style={{ color: 'white', textAlign: 'center', marginTop: '20px' }}>Welcome to the Shop</h1>
+
+      <div className="overlay">
+        <h1 className="shop-title">Welcome to the Shop</h1>
+        <div className="products-container">
+          <div className="products">
+            {Array.from({ length: 12 }, (_, i) => (
+              <div className={`product product-${i % 2 === 0 ? 'even' : 'odd'}`} key={i + 1}>
+                <h2>Product {i + 1}</h2>
+                <p>Description of product {i + 1}</p>
+                <button>Buy Now</button>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
-      {!isLoggedIn && (
-        <LoginPage />
-      )}
+
+      {!isLoggedIn && <LoginPage />}
     </div>
   );
 };
