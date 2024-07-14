@@ -1,21 +1,21 @@
+// src/App.js
 import React from 'react';
 import './App.css';
 import ThreeDScroll from './ThreeDScroll';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
-import Earth from './Earth'; // Earth 컴포넌트를 import
-import ShoppingPage from './Shoppingpage';
-
-
+import Earth from './Earth';
+import ShoppingPage from './ShoppingPage'; // 정확한 파일 이름 사용
+import { AuthProvider } from './AuthContext';
 
 function MainPage() {
-  const navigate = useNavigate(); // useNavigate 훅을 사용하여 navigate 함수 가져오기
+  const navigate = useNavigate();
 
   const handleNavigateToEarth = () => {
-    navigate('/earth'); // 이동하려는 경로로 변경
+    navigate('/earth');
   };
 
   const handleNavigateToShop = () => {
-    navigate('/Shoppingpage'); // 이동하려는 경로로 변경
+    navigate('/shoppingpage');
   };
 
   return (
@@ -33,13 +33,15 @@ function MainPage() {
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/earth" element={<Earth />} />
-        <Route path="/shoppingpage" element={<ShoppingPage />} /> 
-      </Routes>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/earth" element={<Earth />} />
+          <Route path="/shoppingpage" element={<ShoppingPage />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 
