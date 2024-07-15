@@ -126,12 +126,32 @@ function Earth() {
           border: '2px solid #0df',
           borderRadius: '5px',
           color: '#fff',
-        }}>
-          {console.log(userId)}
+        }}> 
           {userId ? `Your Cash: ${clickCount} Units (ID: ${userId})` : `Your Cash: ${clickCount} Units`}
         </div>
+       
       </div>
-
+      <button
+          style={{
+            position: 'absolute',
+            bottom: '5%',
+            left: '50%',
+            transform: 'translate(-50%, 0%)',
+            padding: '20px 70px',
+            fontSize: '18px',
+            backgroundColor: '#0f0f0f',
+            color: '#0df',
+            border: '2px solid #0df',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            textTransform: 'uppercase',
+            letterSpacing: '2px',
+            transition: '0.3s',
+            boxShadow: '0 0 10px #0df, 0 0 20px #0df, 0 0 30px #0df',
+          }} 
+        >
+          저금하기
+        </button>
       {/* 스타일을 정의합니다. */}
       <style>
         {`

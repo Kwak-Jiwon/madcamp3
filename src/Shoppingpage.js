@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useAuth } from './AuthContext';
 import LoginPage from './LoginPage';
 import './ShoppingPage.css';
+import { useNavigate } from 'react-router-dom';
 
 const RotatingStar = () => {
   const { scene } = useGLTF('/star.glb');
@@ -21,6 +22,7 @@ const RotatingStar = () => {
 
 const ShoppingPage = () => {
   //const { isLoggedIn } = useAuth();
+  const navigate = useNavigate();
   const { isLoggedIn, userId,setIsLoggedIn } = useAuth();
   const [items, setItems] = useState([]);
   const [error, setError] = useState(null);
@@ -42,6 +44,11 @@ const ShoppingPage = () => {
     fetchItems();
   }, []);
 
+
+  const handleBuyNow = (itemId) => {
+    navigate(`/items/${itemId}`);
+  };
+
   return (
     <div style={{ width: '100vw', height: '100vh', overflow: 'hidden', position: 'relative' }}>
       <Canvas camera={{ position: [0, 0, 10] }}>
@@ -59,9 +66,9 @@ const ShoppingPage = () => {
             {items.map(item => (
               <div className={`product product-${item.itemid % 2 === 0 ? 'even' : 'odd'}`} key={item.itemid}>
                 <h2>{item.name}</h2>
-                <p>Price: ${item.price}</p>
+                <p>Price: U {item.price.toLocaleString()}</p>
                 <img src={item.item_image_url} alt={item.name} style={{ width: '100px', height: '100px' }} />
-                <button>Buy Now</button>
+                <button onClick={() => handleBuyNow(item.itemid)}>Buy Now</button>
               </div>
             ))}
           </div>
