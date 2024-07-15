@@ -1,0 +1,78 @@
+/* ItemDetail 컴포넌트를 스타일링합니다 */
+
+.item-detail-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7); /* 투명한 검정색 배경 */
+    color: white;
+    min-height: 100vh;
+  }
+  
+  .item-detail {
+    display: flex;
+    background-color: #fff;
+    color: #000;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* 약한 그림자 효과 */
+    overflow: hidden;
+    max-width: 800px;
+    width: 100%;
+  }
+  
+  .item-image {
+    width: 50%;
+    height: auto;
+  }
+  
+  .item-info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .item-info h1 {
+    color: #00bfff; /* 파란색 테마 */
+    text-shadow: 0 0 5px #00bfff, 0 0 10px #00bfff; /* 약한 네온 효과 */
+  }
+  
+  .item-info p {
+    margin: 10px 0;
+  }
+  
+  .buy-now-button {
+    padding: 10px 20px;
+    background-color: #00bfff; /* 파란색 버튼 */
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+    align-self: flex-start;
+  }
+  
+  .buy-now-button:hover {
+    background-color: #009acd;
+  }
+  
+  /* Custom scrollbar styles */
+  .item-detail::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+  .item-detail::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+  }
+  
+  .item-detail::-webkit-scrollbar-thumb {
+    background: rgba(0, 191, 255, 0.1); /* 투명도 70% */
+    border-radius: 6px;
+  }
+  
+  .item-detail::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 154, 205, 0.3); /* 투명도 70% */
+  }
+  
