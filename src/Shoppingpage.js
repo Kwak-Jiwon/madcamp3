@@ -1,6 +1,7 @@
-import React, { useRef } from 'react';
+import React, { useRef ,useEffect,useState} from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
+import axios from 'axios';
 import { useAuth } from './AuthContext';
 import LoginPage from './LoginPage';
 import './ShoppingPage.css';
@@ -19,7 +20,27 @@ const RotatingStar = () => {
 };
 
 const ShoppingPage = () => {
-  const { isLoggedIn } = useAuth();
+  //const { isLoggedIn } = useAuth();
+  const { isLoggedIn, userId,setIsLoggedIn } = useAuth();
+  const [items, setItems] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const response = await axios.get('http://43.200.215.241:2000/items');
+        if (response.data.status === 'success') {
+          setItems(response.data.data);
+        } else {
+          setError(response.data.message);
+        }
+      } catch (error) {
+        setError('Error fetching items');
+      }
+    };
+
+    fetchItems();
+  }, []);
 
   return (
     <div style={{ width: '100vw', height: '100vh', overflow: 'hidden', position: 'relative' }}>
@@ -33,11 +54,13 @@ const ShoppingPage = () => {
       <div className="overlay">
         <h1 className="shop-title">Welcome to the Shop</h1>
         <div className="products-container">
+           {error && <p className="error">{error}</p>}
           <div className="products">
-            {Array.from({ length: 12 }, (_, i) => (
-              <div className={`product product-${i % 2 === 0 ? 'even' : 'odd'}`} key={i + 1}>
-                <h2>Product {i + 1}</h2>
-                <p>Description of product {i + 1}</p>
+            {items.map(item => (
+              <div className={`product product-${item.itemid % 2 === 0 ? 'even' : 'odd'}`} key={item.itemid}>
+                <h2>{item.name}</h2>
+                <p>Price: ${item.price}</p>
+                <img src={item.item_image_url} alt={item.name} style={{ width: '100px', height: '100px' }} />
                 <button>Buy Now</button>
               </div>
             ))}

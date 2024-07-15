@@ -25,7 +25,7 @@ const LoginPage = () => {
       }
     } catch (error) {
       console.error('Error logging in:', error);
-     // setError('An error occurred during login.');
+      setError('An error occurred during login.');
     }
   };
   return (

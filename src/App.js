@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-route
 import Earth from './Earth';
 import ShoppingPage from './ShoppingPage'; // 정확한 파일 이름 사용
 import { AuthProvider } from './AuthContext';
+import { useAuth } from './AuthContext';
 
 function MainPage() {
   const navigate = useNavigate();
