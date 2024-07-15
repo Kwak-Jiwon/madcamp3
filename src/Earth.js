@@ -1,5 +1,5 @@
 // React와 필요한 훅(useRef, useState)을 불러옵니다.
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState,useEffect } from 'react';
 
 // @react-three/fiber에서 Canvas와 useFrame을 불러옵니다. Canvas는 3D 씬을 렌더링하고, useFrame은 매 프레임마다 호출되는 함수입니다.
 import { Canvas, useFrame } from '@react-three/fiber';
@@ -10,6 +10,7 @@ import { OrbitControls, useGLTF } from '@react-three/drei';
 // 사용자 인증을 위한 커스텀 훅과 로그인 페이지 컴포넌트를 불러옵니다.
 import { useAuth } from './AuthContext';
 import LoginPage from './LoginPage';
+import axios from 'axios';
 
 // 지구 모델 컴포넌트를 정의합니다. rotationSpeed를 prop으로 받습니다.
 function EarthModel({ rotationSpeed }) {
@@ -36,9 +37,11 @@ function Earth() {
   // 회전 속도와 클릭 횟수를 상태로 관리합니다.
   const [rotationSpeed, setRotationSpeed] = useState(0);
   const [clickCount, setClickCount] = useState(0);
+  const [totalMoney,setTotalMoney]=useState(0);
+
 
   // 사용자 인증 상태를 가져옵니다.
-  const { isLoggedIn, setIsLoggedIn } = useAuth();
+  const { isLoggedIn,userId, setIsLoggedIn } = useAuth();
 
   // 지구 회전을 처리하는 함수입니다.
   const handleRotate = () => {
@@ -53,7 +56,31 @@ function Earth() {
     // 클릭 횟수를 증가시킵니다.
     setClickCount(prevCount => prevCount + 1);
   };
+  const handleAddMoney = async () => {
+    try {
+      const response = await axios.post('http://43.200.215.241:2000/add-money', {
+        userid: userId,
+        money: clickCount // 예시로 클릭 횟수를 돈으로 사용합니다.
+      });
 
+      if (response.data.status === 'success') {
+        setTotalMoney(response.data.currentMoney);
+       
+        setClickCount(0); // 클릭 횟수를 리셋합니다.
+      } else {
+        alert(response.data.message);
+      }
+    } catch (error) {
+      console.error('Error adding money:', error);
+      alert('Error adding money');
+    }
+  };
+      // totalMoney가 업데이트될 때마다 alert를 표시합니다.
+      useEffect(() => {
+        if (totalMoney !== null) {
+          alert(`Total Money: ${totalMoney}`);
+        }
+      }, [totalMoney]);
   // 전체 화면을 차지하는 div를 렌더링합니다.
   return (
     <div style={{ width: '100vw', height: '100vh', overflow: 'hidden', position: 'relative' }}>
@@ -130,7 +157,28 @@ function Earth() {
           Your Cash: {clickCount} Units
         </div>
       </div>
-
+      <button
+          style={{
+            position: 'absolute',
+            bottom: '5%',
+            left: '50%',
+            transform: 'translate(-50%, 0%)',
+            padding: '20px 70px',
+            fontSize: '18px',
+            backgroundColor: '#0f0f0f',
+            color: '#0df',
+            border: '2px solid #0df',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            textTransform: 'uppercase',
+            letterSpacing: '2px',
+            transition: '0.3s',
+            boxShadow: '0 0 10px #0df, 0 0 20px #0df, 0 0 30px #0df',
+          }} 
+          onClick={handleAddMoney}
+        >
+          저금하기
+        </button>
       {/* 스타일을 정의합니다. */}
       <style>
         {`
