@@ -6,7 +6,31 @@ import LoginPage from './LoginPage';
 import './ShoppingPage.css';
 import userIcon from './assets/person.svg';
 import cartIcon from './assets/cart.svg';
-import productImage from './assets/product.svg'; // 예시 제품 이미지
+
+// 예시 제품 이미지 파일을 불러옵니다.
+import productImage1 from './assets/product1.svg';
+import productImage2 from './assets/product2.svg';
+import productImage3 from './assets/product3.svg';
+// 필요한 만큼 더 추가합니다.
+
+const products = [
+  {
+    name: 'Product 1',
+    description: 'Description of product 1',
+    image: productImage1
+  },
+  {
+    name: 'Product 2',
+    description: 'Description of product 2',
+    image: productImage2
+  },
+  {
+    name: 'Product 3',
+    description: 'Description of product 3',
+    image: productImage3
+  },
+  // 더 많은 제품을 여기에 추가합니다.
+];
 
 const RotatingStar = () => {
   const { scene } = useGLTF('/star.glb');
@@ -59,7 +83,7 @@ const ShoppingPage = () => {
 
       <div className="overlay">
         <header className="header">
-          <h1 className="shop-title">Welcome to the Shop</h1>
+          <h1 className="shop-title">Welcome to Xandar</h1>
           <div className="icons">
             <img src={userIcon} alt="User" onClick={handleUserClick} className="icon" />
             <img src={cartIcon} alt="Cart" onClick={handleCartClick} className="icon" />
@@ -67,12 +91,12 @@ const ShoppingPage = () => {
         </header>
         <div className="products-container">
           <div className="products">
-            {Array.from({ length: 12 }, (_, i) => (
+            {products.map((product, i) => (
               <div className="product" key={i}>
-                <h2>Product {i + 1}</h2>
-                <img src={productImage} alt={`Product ${i + 1}`} className="product-image" />
-                <p>Description of product {i + 1}</p>
-                <button onClick={() => handleAddToCart(`Product ${i + 1}`)}>Add to Cart</button>
+                <h2>{product.name}</h2>
+                <img src={product.image} alt={product.name} className="product-image" />
+                <p>{product.description}</p>
+                <button onClick={() => handleAddToCart(product.name)}>Add to Cart</button>
               </div>
             ))}
           </div>
