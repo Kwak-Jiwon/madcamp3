@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 2rem;
     background-color: rgba(0, 0, 0, 0.7); /* 투명한 검정색 배경 */
     color: white;
     min-height: 100vh;
@@ -12,12 +12,12 @@
     display: flex;
     background-color: rgba(255, 255, 255, 0.1);
     color: white;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* 약한 그림자 효과 */
+    border-radius: 1rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5); /* 약한 그림자 효과 */
     overflow: hidden;
-    max-width: 800px;
+    max-width: 50rem; /* 최대 너비 800px */
     width: 100%;
-    backdrop-filter: blur(10px); /* 배경 흐림 효과 */
+    backdrop-filter: blur(1rem); /* 배경 흐림 효과 */
   }
   
   .item-image {
@@ -27,7 +27,7 @@
   }
   
   .item-info {
-    padding: 20px;
+    padding: 2rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -36,25 +36,25 @@
   
   .item-info h1 {
     color: #00bfff; /* 파란색 테마 */
-    text-shadow: 0 0 5px #00bfff, 0 0 10px #00bfff; /* 약한 네온 효과 */
+    text-shadow: 0 0 0.5rem #00bfff, 0 0 1rem #00bfff; /* 약한 네온 효과 */
   }
   
   .item-info p {
-    margin: 10px 0;
+    margin: 1rem 0;
   }
   
   .button-container {
     display: flex;
-    gap: 10px;
+    gap: 1rem;
   }
   
   .buy-now-button {
-    padding: 10px 20px;
+    padding: 1rem 2rem;
     background-color: #00bfff; /* 파란색 버튼 */
     border: none;
     color: white;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 0.5rem;
     transition: background-color 0.2s;
     flex: 1;
     text-align: center;
@@ -66,17 +66,17 @@
   
   /* Custom scrollbar styles */
   .item-detail::-webkit-scrollbar {
-    width: 12px;
+    width: 1.2rem;
   }
   
   .item-detail::-webkit-scrollbar-track {
     background: rgba(255, 255, 255, 0.1);
-    border-radius: 6px;
+    border-radius: 0.6rem;
   }
   
   .item-detail::-webkit-scrollbar-thumb {
     background: rgba(0, 191, 255, 0.1); /* 투명도 70% */
-    border-radius: 6px;
+    border-radius: 0.6rem;
   }
   
   .item-detail::-webkit-scrollbar-thumb:hover {

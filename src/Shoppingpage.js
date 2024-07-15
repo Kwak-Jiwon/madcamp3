@@ -9,16 +9,6 @@ import cartIcon from './assets/cart.svg';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-import productImage1 from './assets/product1.svg';
-import productImage2 from './assets/product2.svg';
-import productImage3 from './assets/product3.svg';
-
-const products = [
-  { name: 'Product 1', description: 'Description of product 1', image: productImage1 },
-  { name: 'Product 2', description: 'Description of product 2', image: productImage2 },
-  { name: 'Product 3', description: 'Description of product 3', image: productImage3 },
-];
-
 const RotatingStar = () => {
   const { scene } = useGLTF('/star.glb');
   const ref = useRef();
@@ -45,10 +35,12 @@ const ShoppingPage = () => {
 
   const handleUserClick = () => {
     setShowUserModal(true);
+    setShowCartModal(false); // 유저 모달을 열 때 카트 모달을 닫음
   };
 
   const handleCartClick = () => {
     setShowCartModal(true);
+    setShowUserModal(false); // 카트 모달을 열 때 유저 모달을 닫음
   };
 
   const handleCloseModal = () => {
@@ -138,8 +130,11 @@ const ShoppingPage = () => {
           <div className="modal-content">
             <span className="close" onClick={handleCloseModal}>&times;</span>
             <h2>User Information</h2>
-            <p>{userId}</p>
-            <button onClick={logout}>Logout</button>
+            <p>{userId}으로 로그인 중</p>
+            <div className="modal-buttons">
+              <button>주문내역</button>
+              <button className="logout-button" onClick={logout}>Logout</button>
+            </div>
           </div>
         </div>
       )}

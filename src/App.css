@@ -1,170 +1,230 @@
-/* src/App.css */
-
 .App {
-  text-align: center;
-  position: relative;
-  z-index: 0;
+  text-align: center; /* 텍스트를 중앙 정렬 */
+  position: relative; /* 상대적인 위치 설정 */
+  z-index: 0; /* z-index를 0으로 설정 */
 }
 
 .App-header {
-  background-color: #282c34;
-  padding: 20px;
-  color: white;
+  background-color: #282c34; /* 배경색 설정 */
+  padding: 20px; /* 패딩 설정 */
+  color: white; /* 텍스트 색상 설정 */
 }
 
 .App h1 {
-  margin: 0;
+  margin: 0; /* 마진 제거 */
 }
 
 .scroll-container {
   height: 800vh; /* 스크롤 높이 설정 */
-  position: relative;
+  position: relative; /* 상대적인 위치 설정 */
 }
 
 .canvas-container {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: -1;
+  position: fixed; /* 고정 위치 설정 */
+  top: 50%; /* 상단에서 50% 아래로 */
+  left: 50%; /* 왼쪽에서 50% 오른쪽으로 */
+  transform: translate(-50%, -50%); /* 중앙으로 이동 */
+  width: 100vw; /* 너비를 100%로 설정 */
+  height: 100vh; /* 높이를 100%로 설정 */
+  pointer-events: none; /* 포인터 이벤트 비활성화 */
+  z-index: -1; /* z-index를 -1로 설정 */
 }
 
 canvas {
-  width: 100%;
-  height: 100%;
-  display: block;
+  width: 100%; /* 너비를 100%로 설정 */
+  height: 100%; /* 높이를 100%로 설정 */
+  display: block; /* 블록 요소로 설정 */
 }
 
 .content-container {
-  position: relative;
-  z-index: 1;
-  pointer-events: none; /* 콘텐츠와 상호작용 불가 설정 */
+  position: relative; /* 상대적인 위치 설정 */
+  z-index: 1; /* z-index를 1로 설정 */
+  pointer-events: none; /* 포인터 이벤트 비활성화 */
+}
+
+.button1,
+.button2 {
+  position: absolute; /* 절대 위치 설정 */
+  width: 20rem; /* 너비를 20rem으로 설정 */
+  height: 12rem; /* 높이를 12rem으로 설정 */
+  background-color: #000000c4; /* 반투명 검정 배경색 설정 */
+  color: #ffffff; /* 텍스트 색상 설정 */
+  border: 2px solid #000000; /* 테두리 설정 */
+  border-radius: 3rem; /* 테두리 반경 설정 */
+  font-size: 2rem; /* 폰트 크기 설정 */
+  font-weight: bold; /* 폰트 굵기 설정 */
+  cursor: pointer; /* 커서 모양 변경 */
+  z-index: 2; /* z-index를 2로 설정 */
+  transition: all 0.3s ease; /* 모든 속성의 전환 시간 설정 */
+  text-transform: uppercase; /* 텍스트를 대문자로 변환 */
+  box-shadow: 0 0 1rem #ffffff, 0 0 2rem #ffffff, 0 0 3rem #ffffff; /* 글로우 효과 설정 */
+  pointer-events: auto; /* 포인터 이벤트 활성화 */
 }
 
 .button1 {
-  position: absolute; /* 절대 위치를 사용합니다. */
-  top: 1100px; /* 부모 요소의 하단에서 20px 위로 설정합니다. */
-  right: 100px; /* 부모 요소의 오른쪽에서 30px 왼쪽으로 설정합니다. */
-  width: 500px;
-  height: 300px;
-  background-color: #000000c4;
-  color: #ffffff; /* 네온 그린 색상 */
-  border: 2px solid #000000;
-  border-radius: 100px;
-  font-size: 70px;
-  font-weight: bold;
-  cursor: pointer;
-  z-index: 2;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  box-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff; /* 글로우 효과 */
-  pointer-events: auto; /* 버튼과 상호작용 가능 설정 */
+  top: 1100px; /* 상단에서 1100px 아래로 */
+  right: 10%; /* 오른쪽에서 10% 왼쪽으로 */
 }
 
 .button2 {
-  position: absolute; /* 절대 위치를 사용합니다. */
-  top: 2000px; /* 부모 요소의 하단에서 20px 위로 설정합니다. */
-  right: 900px; /* 부모 요소의 오른쪽에서 30px 왼쪽으로 설정합니다. */
-  width: 500px;
-  height: 300px;
-  background-color: #000000c4;
-  color: #ffffff; /* 네온 그린 색상 */
-  border: 2px solid #000000;
-  border-radius: 100px;
-  font-size: 70px;
-  font-weight: bold;
-  cursor: pointer;
-  z-index: 2;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  box-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff; /* 글로우 효과 */
-  pointer-events: auto; /* 버튼과 상호작용 가능 설정 */
+  top: 2000px; /* 상단에서 2000px 아래로 */
+  right: 50%; /* 오른쪽에서 50% 왼쪽으로 */
+  transform: translateX(50%); /* X축 방향으로 50% 이동 */
 }
 
-.button1:hover {
-  background-color: #ffffff;
-  color: #0d0d0d;
-  box-shadow: 0 0 60px #ffffff, 0 0 60px #ffffff, 0 0 60px #ffffff; /* 호버 시 더 강한 글로우 효과 */
-}
-
+.button1:hover,
 .button2:hover {
-  background-color: #ffffff;
-  color: #0d0d0d;
-  box-shadow: 0 0 60px #ffffff, 0 0 60px #ffffff, 0 0 60px #ffffff; /* 호버 시 더 강한 글로우 효과 */
+  background-color: #ffffff; /* 배경색을 흰색으로 변경 */
+  color: #0d0d0d; /* 텍스트 색상을 검정으로 변경 */
+  box-shadow: 0 0 6rem #ffffff, 0 0 6rem #ffffff, 0 0 6rem #ffffff; /* 호버 시 더 강한 글로우 효과 설정 */
+}
+
+/* 화면 너비가 1024px 이하일 때 */
+@media (max-width: 1024px) {
+  .button1,
+  .button2 {
+    width: 16rem; /* 너비를 16rem으로 설정 */
+    height: 10rem; /* 높이를 10rem으로 설정 */
+    font-size: 1.5rem; /* 폰트 크기를 1.5rem으로 설정 */
+  }
+
+  .button1 {
+    top: 1100px; /* 상단에서 1100px 아래로 */
+    right: 5%; /* 오른쪽에서 5% 왼쪽으로 */
+  }
+
+  .button2 {
+    top: 2000px; /* 상단에서 2000px 아래로 */
+    right: 5%; /* 오른쪽에서 5% 왼쪽으로 */
+    transform: none; /* 변환 효과 제거 */
+  }
+}
+
+/* 화면 너비가 768px 이하일 때 */
+@media (max-width: 768px) {
+  .button1,
+  .button2 {
+    width: 14rem; /* 너비를 14rem으로 설정 */
+    height: 8rem; /* 높이를 8rem으로 설정 */
+    font-size: 1.2rem; /* 폰트 크기를 1.2rem으로 설정 */
+  }
+
+  .button1 {
+    top: 1100px; /* 상단에서 1100px 아래로 */
+    right: 5%; /* 오른쪽에서 5% 왼쪽으로 */
+  }
+
+  .button2 {
+    top: 2000px; /* 상단에서 2000px 아래로 */
+    right: 5%; /* 오른쪽에서 5% 왼쪽으로 */
+    transform: none; /* 변환 효과 제거 */
+  }
+}
+
+/* 화면 너비가 480px 이하일 때 */
+@media (max-width: 480px) {
+  .button1,
+  .button2 {
+    width: 12rem; /* 너비를 12rem으로 설정 */
+    height: 6rem; /* 높이를 6rem으로 설정 */
+    font-size: 1rem; /* 폰트 크기를 1rem으로 설정 */
+  }
+
+  .button1 {
+    top: 1100px; /* 상단에서 1100px 아래로 */
+    right: 5%; /* 오른쪽에서 5% 왼쪽으로 */
+  }
+
+  .button2 {
+    top: 2000px; /* 상단에서 2000px 아래로 */
+    right: 5%; /* 오른쪽에서 5% 왼쪽으로 */
+    transform: none; /* 변환 효과 제거 */
+  }
 }
 
 /* 추가된 CSS */
 .shop-container {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
+  position: relative; /* 상대적인 위치 설정 */
+  width: 100vw; /* 너비를 100vw로 설정 */
+  height: 100vh; /* 높이를 100vh로 설정 */
+  overflow: hidden; /* 넘치는 부분을 숨김 */
 }
 
 .shop-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none; /* 캔버스와의 상호작용을 막습니다. */
+  position: absolute; /* 절대 위치 설정 */
+  top: 0; /* 상단에 고정 */
+  left: 0; /* 왼쪽에 고정 */
+  width: 100%; /* 너비를 100%로 설정 */
+  height: 100%; /* 높이를 100%로 설정 */
+  z-index: 0; /* z-index를 0으로 설정 */
+  pointer-events: none; /* 포인터 이벤트 비활성화 */
 }
 
 .shop-content {
-  position: relative;
-  z-index: 10; /* 상품 콘텐츠가 캔버스 위에 표시되도록 z-index를 높입니다. */
-  color: white;
-  padding: 20px;
-  overflow: auto; /* 콘텐츠가 넘칠 경우 스크롤 가능하게 설정합니다. */
-  height: 100vh; /* 화면 높이를 차지하도록 설정합니다. */
+  position: relative; /* 상대적인 위치 설정 */
+  z-index: 10; /* z-index를 10으로 설정 */
+  color: white; /* 텍스트 색상 설정 */
+  padding: 20px; /* 패딩 설정 */
+  overflow: auto; /* 넘치는 부분을 스크롤 가능하게 설정 */
+  height: 100vh; /* 높이를 100vh로 설정 */
 }
 
 .products {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  display: flex; /* 플렉스 박스 사용 */
+  flex-wrap: wrap; /* 플렉스 아이템들을 여러 줄로 배치 */
+  justify-content: space-around; /* 공간을 균등하게 분배 */
 }
 
 .product {
-  margin: 10px;
-  padding: 20px;
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
-  width: calc(33.333% - 20px);
-  color: white;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin: 10px; /* 마진 설정 */
+  padding: 20px; /* 패딩 설정 */
+  background-color: rgba(0, 0, 0, 0.5); /* 반투명 검정 배경색 설정 */
+  border-radius: 10px; /* 테두리 반경 설정 */
+  width: calc(33.333% - 20px); /* 3등분으로 너비 설정 */
+  color: white; /* 텍스트 색상 설정 */
+  text-align: center; /* 텍스트 중앙 정렬 */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* 전환 효과 설정 */
 }
 
 .product img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
+  width: 100%; /* 너비를 100%로 설정 */
+  height: auto; /* 높이를 자동 설정 */
+  border-radius: 10px; /* 테두리 반경 설정 */
 }
 
 .product:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  transform: scale(1.05); /* 확대 효과 설정 */
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); /* 그림자 효과 설정 */
 }
 
 .product h2 {
-  margin-top: 0;
+  margin-top: 0; /* 상단 마진 제거 */
 }
 
 .product button {
-  margin-top: 10px;
-  padding: 10px 20px;
-  background-color: #ff5722;
-  border: none;
-  color: white;
-  cursor: pointer;
-  border-radius: 5px;
+  margin-top: 10px; /* 상단 마진 설정 */
+  padding: 10px 20px; /* 패딩 설정 */
+  background-color: #ff5722; /* 배경색 설정 */
+  border: none; /* 테두리 제거 */
+  color: white; /* 텍스트 색상 설정 */
+  cursor: pointer; /* 커서 모양 변경 */
+  border-radius: 5px; /* 테두리 반경 설정 */
 }
 
 .product button:hover {
-  background-color: #e64a19;
+  background-color: #e64a19; /* 호버 시 배경색 변경 */
+}
+
+/* 화면 너비가 768px 이하일 때 */
+@media (max-width: 768px) {
+  .product {
+    width: calc(50% - 20px); /* 2등분으로 너비 설정 */
+  }
+}
+
+/* 화면 너비가 480px 이하일 때 */
+@media (max-width: 480px) {
+  .product {
+    width: calc(100% - 20px); /* 1등분으로 너비 설정 */
+  }
 }
