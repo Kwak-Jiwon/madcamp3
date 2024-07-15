@@ -41,8 +41,10 @@ const ItemDetail = () => {
           <h1>{item.name}</h1>
           <p>Price: ${item.price.toLocaleString()}</p>
           <p>{item.description1}</p>
-          <button className="buy-now-button">Buy Now</button>
-          <button className="buy-now-button">장바구니</button>
+          <div className="button-container">
+            <button className="buy-now-button">Buy Now</button>
+            <button className="buy-now-button">장바구니</button>
+          </div>
         </div>
       </div>
     </div>
