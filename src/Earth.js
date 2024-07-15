@@ -170,9 +170,9 @@ function Earth() {
       <button
           style={{
             position: 'absolute',
-            bottom: '5%',
-            left: '50%',
-            transform: 'translate(-50%, 0%)',
+            bottom: '87%',
+            left: '90%',
+            //transform: 'translate(-50%, 0%)',
             padding: '20px 70px',
             fontSize: '18px',
             backgroundColor: '#0f0f0f',
