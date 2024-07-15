@@ -1,5 +1,10 @@
 /* src/ShoppingPage.css */
 
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
 .overlay {
   position: absolute;
   top: 0;

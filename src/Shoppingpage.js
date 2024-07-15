@@ -7,29 +7,14 @@ import './ShoppingPage.css';
 import userIcon from './assets/person.svg';
 import cartIcon from './assets/cart.svg';
 
-// 예시 제품 이미지 파일을 불러옵니다.
 import productImage1 from './assets/product1.svg';
 import productImage2 from './assets/product2.svg';
 import productImage3 from './assets/product3.svg';
-// 필요한 만큼 더 추가합니다.
 
 const products = [
-  {
-    name: 'Product 1',
-    description: 'Description of product 1',
-    image: productImage1
-  },
-  {
-    name: 'Product 2',
-    description: 'Description of product 2',
-    image: productImage2
-  },
-  {
-    name: 'Product 3',
-    description: 'Description of product 3',
-    image: productImage3
-  },
-  // 더 많은 제품을 여기에 추가합니다.
+  { name: 'Product 1', description: 'Description of product 1', image: productImage1 },
+  { name: 'Product 2', description: 'Description of product 2', image: productImage2 },
+  { name: 'Product 3', description: 'Description of product 3', image: productImage3 },
 ];
 
 const RotatingStar = () => {
@@ -50,6 +35,7 @@ const ShoppingPage = () => {
   const [cartItems, setCartItems] = useState([]);
   const [showUserModal, setShowUserModal] = useState(false);
   const [showCartModal, setShowCartModal] = useState(false);
+  const [checkedItems, setCheckedItems] = useState([]);
 
   const handleUserClick = () => {
     setShowUserModal(true);
@@ -66,6 +52,19 @@ const ShoppingPage = () => {
 
   const handleAddToCart = (product) => {
     setCartItems([...cartItems, product]);
+  };
+
+  const handleCheckboxChange = (product) => {
+    setCheckedItems((prev) =>
+      prev.includes(product)
+        ? prev.filter((item) => item !== product)
+        : [...prev, product]
+    );
+  };
+
+  const handleRemoveFromCart = () => {
+    setCartItems(cartItems.filter((item) => !checkedItems.includes(item)));
+    setCheckedItems([]);
   };
 
   if (!isLoggedIn) {
@@ -122,11 +121,21 @@ const ShoppingPage = () => {
             <span className="close" onClick={handleCloseModal}>&times;</span>
             <h2>Shopping Cart</h2>
             {cartItems.length > 0 ? (
-              <ul>
-                {cartItems.map((item, index) => (
-                  <li key={index}>{item}</li>
-                ))}
-              </ul>
+              <div>
+                <ul>
+                  {cartItems.map((item, index) => (
+                    <li key={index}>
+                      <input
+                        type="checkbox"
+                        checked={checkedItems.includes(item)}
+                        onChange={() => handleCheckboxChange(item)}
+                      />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <button onClick={handleRemoveFromCart}>Remove Selected Items</button>
+              </div>
             ) : (
               <p>Your cart is empty</p>
             )}
