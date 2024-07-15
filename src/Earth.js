@@ -38,7 +38,7 @@ function Earth() {
   const [clickCount, setClickCount] = useState(0);
 
   // 사용자 인증 상태를 가져옵니다.
-  const { isLoggedIn, setIsLoggedIn } = useAuth();
+  const { isLoggedIn, userId,setIsLoggedIn } = useAuth();
 
   // 지구 회전을 처리하는 함수입니다.
   const handleRotate = () => {
@@ -127,7 +127,8 @@ function Earth() {
           borderRadius: '5px',
           color: '#fff',
         }}>
-          Your Cash: {clickCount} Units
+          {console.log(userId)}
+          {userId ? `Your Cash: ${clickCount} Units (ID: ${userId})` : `Your Cash: ${clickCount} Units`}
         </div>
       </div>
 
@@ -151,3 +152,4 @@ function Earth() {
 
 // Earth 컴포넌트를 기본 내보내기로 내보냅니다.
 export default Earth;
+

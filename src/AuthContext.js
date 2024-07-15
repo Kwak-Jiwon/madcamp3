@@ -8,10 +8,21 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   // isLoggedIn 상태와 이를 업데이트할 setIsLoggedIn 함수를 useState 훅을 사용하여 정의합니다.
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userId,setUserId]=useState(null);
+
+  const login=(id)=>{
+    setIsLoggedIn(true);
+    setUserId(id);
+  };
+
+  const logout=()=>{
+    setIsLoggedIn(false);
+    setUserId(null);
+  }
 
   // AuthContext.Provider를 사용하여 자식 컴포넌트들에게 isLoggedIn과 setIsLoggedIn을 제공합니다.
   return (
-    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+    <AuthContext.Provider value={{ isLoggedIn, userId,login,logout }}>
       {children}
     </AuthContext.Provider>
   );
