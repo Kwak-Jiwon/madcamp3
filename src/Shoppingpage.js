@@ -4,8 +4,9 @@ import { useGLTF } from '@react-three/drei';
 import { useAuth } from './AuthContext';
 import LoginPage from './LoginPage';
 import './ShoppingPage.css';
-import userIcon from './assets/user.png';
-import cartIcon from './assets/cart.webp';
+import userIcon from './assets/person.svg';
+import cartIcon from './assets/cart.svg';
+import productImage from './assets/product.svg'; // 예시 제품 이미지
 
 const RotatingStar = () => {
   const { scene } = useGLTF('/star.glb');
@@ -13,7 +14,7 @@ const RotatingStar = () => {
 
   useFrame(() => {
     if (ref.current) {
-      ref.current.rotation.y += 0.0003;
+      ref.current.rotation.y += 0.0002;
     }
   });
 
@@ -22,7 +23,7 @@ const RotatingStar = () => {
 
 const ShoppingPage = () => {
   const { isLoggedIn, user, logout } = useAuth();
-  const [cartItems, setCartItems] = useState(['Product 1', 'Product 2']);
+  const [cartItems, setCartItems] = useState([]);
   const [showUserModal, setShowUserModal] = useState(false);
   const [showCartModal, setShowCartModal] = useState(false);
 
@@ -37,6 +38,10 @@ const ShoppingPage = () => {
   const handleCloseModal = () => {
     setShowUserModal(false);
     setShowCartModal(false);
+  };
+
+  const handleAddToCart = (product) => {
+    setCartItems([...cartItems, product]);
   };
 
   if (!isLoggedIn) {
@@ -63,10 +68,11 @@ const ShoppingPage = () => {
         <div className="products-container">
           <div className="products">
             {Array.from({ length: 12 }, (_, i) => (
-              <div className={`product product-${i % 2 === 0 ? 'even' : 'odd'}`} key={i + 1}>
+              <div className="product" key={i}>
                 <h2>Product {i + 1}</h2>
+                <img src={productImage} alt={`Product ${i + 1}`} className="product-image" />
                 <p>Description of product {i + 1}</p>
-                <button>Buy Now</button>
+                <button onClick={() => handleAddToCart(`Product ${i + 1}`)}>Add to Cart</button>
               </div>
             ))}
           </div>
