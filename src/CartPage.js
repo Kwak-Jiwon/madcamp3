@@ -134,22 +134,25 @@ const CartPage = () => {
           <ul>
             {cartItems.map((item, index) => (
               <li key={index} className="cart-item">
-                <input
-                  type="checkbox"
-                  checked={checkedItems.includes(item.itemid)}
-                  onChange={() => handleCheckboxChange(item.itemid)}
-                />
-                <img src={item.item_image_url} alt={item.name} className="cart-item-image" />
-                <span>{item.name}</span>
-                <span>{item.price.toLocaleString()}원</span>
-                <input
-                  type="number"
-                  min="0"
-                  value={item.itemcnt}
-                  onChange={(e) => handleQuantityChange(item.itemid, parseInt(e.target.value))}
-                  onBlur={(e) => handleQuantityBlur(item.itemid, parseInt(e.target.value))}
-                />
-                <span>개</span>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={checkedItems.includes(item.itemid)}
+                    onChange={() => handleCheckboxChange(item.itemid)}
+                  />
+                  <img src={item.item_image_url} alt={item.name} className="cart-item-image" />
+                  <span>{item.name}</span>
+                  <span>{item.price.toLocaleString()}원</span>
+                  <input
+                    type="number"
+                    min="0"
+                    value={item.itemcnt}
+                    onClick={(e) => e.stopPropagation()}
+                    onChange={(e) => handleQuantityChange(item.itemid, parseInt(e.target.value))}
+                    onBlur={(e) => handleQuantityBlur(item.itemid, parseInt(e.target.value))}
+                  />
+                  <span>개</span>
+                </label>
               </li>
             ))}
           </ul>
