@@ -27,8 +27,7 @@ function MainPage() {
         <div className="scroll-container">
           <button className='button1' onClick={handleNavigateToEarth}>NEED MORE CASH</button>
           <button className='button2' onClick={handleNavigateToShop}>SHOP NOW</button>
-          {userId && <p>Logged in as: {userId}</p>} {/* 사용자 ID를 표시합니다. */}
-        </div>
+            </div>
       </div>
     </div>
   );

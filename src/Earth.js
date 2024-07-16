@@ -39,6 +39,7 @@ function Earth() {
   const [clickCount, setClickCount] = useState(0);
   const [totalMoney,setTotalMoney]=useState(0);
 
+  const [moneyUpdated, setMoneyUpdated] = useState(false); // 돈이 업데이트되었는지 여부를 추적
 
   // 사용자 인증 상태를 가져옵니다.
   const { isLoggedIn,userId, setIsLoggedIn } = useAuth();
@@ -65,7 +66,7 @@ function Earth() {
 
       if (response.data.status === 'success') {
         setTotalMoney(response.data.currentMoney);
-       
+        setMoneyUpdated(true); // 돈이 업데이트되었음을 표시
         setClickCount(0); // 클릭 횟수를 리셋합니다.
       } else {
         alert(response.data.message);
@@ -75,12 +76,21 @@ function Earth() {
       alert('Error adding money');
     }
   };
-      // totalMoney가 업데이트될 때마다 alert를 표시합니다.
-      useEffect(() => {
-        if (totalMoney !== null) {
-          alert(`Total Money: ${totalMoney}`);
-        }
-      }, [totalMoney]);
+      // // totalMoney가 업데이트될 때마다 alert를 표시합니다.
+      // useEffect(() => {
+      //   if (totalMoney !== null) {
+      //     alert(`Total Money: ${totalMoney}`);
+      //   }
+      // }, [totalMoney]);
+
+        // moneyUpdated가 true일 때만 alert를 표시합니다.
+  useEffect(() => {
+    if (moneyUpdated) {
+      alert(`Total Money: ${totalMoney}`);
+      setMoneyUpdated(false); // 알림 후 다시 false로 설정
+    }
+  }, [moneyUpdated, totalMoney]);
+
   // 전체 화면을 차지하는 div를 렌더링합니다.
   return (
     <div style={{ width: '100vw', height: '100vh', overflow: 'hidden', position: 'relative' }}>
@@ -160,9 +170,9 @@ function Earth() {
       <button
           style={{
             position: 'absolute',
-            bottom: '5%',
-            left: '50%',
-            transform: 'translate(-50%, 0%)',
+            bottom: '87%',
+            left: '90%',
+            //transform: 'translate(-50%, 0%)',
             padding: '20px 70px',
             fontSize: '18px',
             backgroundColor: '#0f0f0f',
