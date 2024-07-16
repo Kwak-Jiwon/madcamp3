@@ -92,7 +92,7 @@ const ItemDetail = () => {
   return (
     <div className="item-detail-container">
       <header className="header">
-        <h1 className="shop-title" onClick={() => navigate('/ShoppingPage')} style={{ cursor: 'pointer' }}>
+        <h1 className="shop-title" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
           Welcome to Xandar
         </h1>
         <div className="icons"></div>

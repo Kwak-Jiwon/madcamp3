@@ -132,7 +132,7 @@ const ShoppingPage = () => {
 
       <div className="overlay">
         <header className="header">
-          <h1 className="shop-title">Welcome to Xandar</h1>
+          <h1 className="shop-title" onClick={() => navigate('/')}>Welcome to Xandar</h1>
           <div className="icons">
             <img src={userIcon} alt="User" onClick={handleUserClick} className="icon" />
             <img src={cartIcon} alt="Cart" onClick={handleCartClick} className="icon" />

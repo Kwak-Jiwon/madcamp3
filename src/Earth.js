@@ -5,6 +5,7 @@ import { useAuth } from './AuthContext';
 import LoginPage from './LoginPage';
 import axios from 'axios';
 import Modal from 'react-modal';
+import { useNavigate } from 'react-router-dom';
 
 // 지구 모델 컴포넌트를 정의합니다.
 function EarthModel({ rotationSpeed }) {
@@ -23,6 +24,7 @@ function EarthModel({ rotationSpeed }) {
 // 지구 컴포넌트를 정의합니다.
 function Earth() {
   const [rotationSpeed, setRotationSpeed] = useState(0);
+  const navigate = useNavigate();
   const [clickCount, setClickCount] = useState(0);
   const [totalMoney, setTotalMoney] = useState(0);
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -73,7 +75,7 @@ function Earth() {
 
   return (
     <div style={{ width: '100vw', height: '100vh', overflow: 'hidden', position: 'relative' }}>
-      <Canvas camera={{ position: [0, 0, 10] }}>
+      <Canvas camera={{ position: [0, 0, 10] }} style={{ position: 'absolute', top: 0, left: 0, zIndex: -1 }}>
         <ambientLight intensity={0.5} />
         <directionalLight position={[10, 10, 5]} intensity={1} />
         <pointLight position={[-10, -10, 10]} intensity={1} />
@@ -83,34 +85,60 @@ function Earth() {
         <EarthModel rotationSpeed={rotationSpeed} />
         <OrbitControls enableZoom={false} />
       </Canvas>
-
+      <header className="header">
+        <h1 className="shop-title" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
+          Welcome to Xandar
+        </h1>
+        <div className="icons"></div>
+      </header>
       {!isLoggedIn && <LoginPage />}
-
       {isLoggedIn && (
-        <button
-          style={{
-            position: 'absolute',
-            bottom: '8%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            padding: '20px 70px',
-            fontSize: '18px',
-            backgroundColor: '#0f0f0f',
-            color: '#0df',
-            border: '2px solid #0df',
-            borderRadius: '5px',
-            cursor: 'pointer',
-            textTransform: 'uppercase',
-            letterSpacing: '2px',
-            transition: '0.3s',
-            boxShadow: '0 0 10px #0df, 0 0 20px #0df, 0 0 30px #0df',
-          }}
-          onClick={handleRotate}
-        >
-          Engine
-        </button>
+        <>
+          <button
+            style={{
+              position: 'absolute',
+              bottom: '8%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              padding: '20px 70px',
+              fontSize: '18px',
+              backgroundColor: '#0f0f0f',
+              color: '#0df',
+              border: '2px solid #0df',
+              borderRadius: '5px',
+              cursor: 'pointer',
+              textTransform: 'uppercase',
+              letterSpacing: '2px',
+              transition: '0.3s',
+              boxShadow: '0 0 10px #0df, 0 0 20px #0df, 0 0 30px #0df',
+            }}
+            onClick={handleRotate}
+          >
+            Engine
+          </button>
+          <button
+            style={{
+              position: 'absolute',
+              bottom: '87%',
+              left: '90%',
+              padding: '20px 70px',
+              fontSize: '18px',
+              backgroundColor: '#0f0f0f',
+              color: '#0df',
+              border: '2px solid #0df',
+              borderRadius: '5px',
+              cursor: 'pointer',
+              textTransform: 'uppercase',
+              letterSpacing: '2px',
+              transition: '0.3s',
+              boxShadow: '0 0 10px #0df, 0 0 20px #0df, 0 0 30px #0df',
+            }} 
+            onClick={handleAddMoney}
+          >
+            저금하기
+          </button>
+        </>
       )}
-
       <div
         style={{
           position: 'absolute',
@@ -134,27 +162,6 @@ function Earth() {
           Your Cash: {clickCount} Units
         </div>
       </div>
-      <button
-          style={{
-            position: 'absolute',
-            bottom: '87%',
-            left: '90%',
-            padding: '20px 70px',
-            fontSize: '18px',
-            backgroundColor: '#0f0f0f',
-            color: '#0df',
-            border: '2px solid #0df',
-            borderRadius: '5px',
-            cursor: 'pointer',
-            textTransform: 'uppercase',
-            letterSpacing: '2px',
-            transition: '0.3s',
-            boxShadow: '0 0 10px #0df, 0 0 20px #0df, 0 0 30px #0df',
-          }} 
-          onClick={handleAddMoney}
-        >
-          저금하기
-        </button>
 
       <Modal isOpen={modalIsOpen} onRequestClose={closeModal} className="modal" overlayClassName="overlay">
         <h2>{modalMessage}</h2>

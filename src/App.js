@@ -4,7 +4,7 @@ import './App.css';
 import ThreeDScroll from './ThreeDScroll';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 import Earth from './Earth';
-import ShoppingPage from './ShoppingPage'; // 정확한 파일 이름 사용
+import ShoppingPage from './ShoppingPage.js'; // 정확한 파일 이름 사용
 import CartPage from './CartPage'; // 새로운 CartPage 컴포넌트 추가
 import PurchaseHistory from './PurchaseHistory.js';
 import { AuthProvider } from './AuthContext';
