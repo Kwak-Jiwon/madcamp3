@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useAuth } from './AuthContext';
 import './CartPage.css';
 import { useNavigate } from 'react-router-dom';
+import Modal from 'react-modal';
 
 const CartPage = () => {
   const { userId } = useAuth();
@@ -11,6 +12,8 @@ const CartPage = () => {
   const [error, setError] = useState(null);
   const [checkedItems, setCheckedItems] = useState([]);
   const [purchaseSuccess, setPurchaseSuccess] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchCartItems = async () => {
@@ -97,7 +100,8 @@ const CartPage = () => {
 
   const handlePurchase = async () => {
     if (checkedItems.length === 0) {
-      alert('구매할 아이템을 선택해주세요.');
+      setModalMessage('구매할 아이템을 선택해주세요.');
+      setIsModalOpen(true);
       return;
     }
 
@@ -115,10 +119,12 @@ const CartPage = () => {
         setCartItems(cartItems.filter((item) => !checkedItems.includes(item.itemid)));
         setCheckedItems([]);
       } else {
-        alert(response.data.message);
+        setModalMessage(response.data.message);
+        setIsModalOpen(true);
       }
     } catch (error) {
-      alert('잔액이 부족합니다.');
+      setModalMessage('잔액이 부족합니다.');
+      setIsModalOpen(true);
     }
   };
 
@@ -128,6 +134,7 @@ const CartPage = () => {
 
   const handleCloseModal = () => {
     setPurchaseSuccess(false);
+    setIsModalOpen(false);
   };
 
   const calculateTotal = () => {
@@ -141,6 +148,12 @@ const CartPage = () => {
 
   return (
     <div className="cart-page">
+      <header className="header">
+        <h1 className="shop-title" onClick={() => navigate('/ShoppingPage')} style={{ cursor: 'pointer' }}>
+          Welcome to Xandar
+        </h1>
+        <div className="icons"></div>
+      </header>
       <h2>Shopping Cart</h2>
       {error && <p className="error">{error}</p>}
       {cartItems.length > 0 ? (
@@ -186,17 +199,29 @@ const CartPage = () => {
         <p>Your cart is empty</p>
       )}
 
-      {purchaseSuccess && (
-        <div className="modal">
-          <div className="modal-content">
-            <span className="close" onClick={handleCloseModal}>
-              &times;
-            </span>
-            <h2>구매가 완료되었습니다!</h2>
-            <button onClick={handleViewPurchaseHistory}>구매내역으로 이동</button>
+      <Modal
+        isOpen={purchaseSuccess || isModalOpen}
+        onRequestClose={handleCloseModal}
+        className="modal"
+        overlayClassName="overlay"
+      >
+        <div className="modal-content">
+          <span className="close" onClick={handleCloseModal}>
+            &times;
+          </span>
+          <h2>{purchaseSuccess ? '구매가 완료되었습니다!' : modalMessage}</h2>
+          <div className="modal-buttons">
+            {purchaseSuccess ? (
+              <>
+                <button onClick={handleViewPurchaseHistory}>구매내역으로 이동</button>
+                <button onClick={handleCloseModal}>닫기</button>
+              </>
+            ) : (
+              <button onClick={handleCloseModal}>확인</button>
+            )}
           </div>
         </div>
-      )}
+      </Modal>
     </div>
   );
 };

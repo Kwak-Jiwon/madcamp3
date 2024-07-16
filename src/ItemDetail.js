@@ -91,6 +91,12 @@ const ItemDetail = () => {
 
   return (
     <div className="item-detail-container">
+      <header className="header">
+        <h1 className="shop-title" onClick={() => navigate('/ShoppingPage')} style={{ cursor: 'pointer' }}>
+          Welcome to Xandar
+        </h1>
+        <div className="icons"></div>
+      </header>
       <div className="item-detail">
         <img src={item.item_image_url} alt={item.name} className="item-image" />
         <div className="item-info">
@@ -98,8 +104,8 @@ const ItemDetail = () => {
           <p>Price: ${item.price.toLocaleString()}</p>
           <p>{item.description1}</p>
           <div className="button-container">
-            <button className="buy-now-button" onClick={handleBuyNow}>Buy Now</button>
-            <button className="buy-now-button" onClick={handleAddToCart}>장바구니</button>
+            <button className="buy-now-button" onClick={handleBuyNow}>구매하기</button>
+            <button className="buy-now-button" onClick={handleAddToCart}>장바구니에 담기</button>
           </div>
         </div>
       </div>
@@ -107,8 +113,11 @@ const ItemDetail = () => {
       <Modal isOpen={modalIsOpen} onRequestClose={closeModal} className="modal" overlayClassName="overlay">
         <h2>{modalMessage}</h2>
         <div className="modal-buttons">
-          <button onClick={modalAction} className="confirm-button">확인</button>
-          <button onClick={closeModal} className="cancel-button">취소</button>
+          <button onClick={() => {
+            modalAction && modalAction();
+            closeModal();
+          }} className="confirm-button">확인</button>
+          <button onClick={closeModal} className="cancel-button">닫기</button>
         </div>
       </Modal>
     </div>

@@ -157,7 +157,7 @@ const ShoppingPage = () => {
                       handleBuyNow(item.itemid);
                     }}
                   >
-                    Buy Now
+                    구매하기
                   </button>
                   <button
                     onClick={(e) => {
@@ -165,7 +165,7 @@ const ShoppingPage = () => {
                       handleAddToCart(item);
                     }}
                   >
-                    Add to Cart
+                    장바구니에 담기
                   </button>
                 </div>
               </div>
@@ -212,7 +212,7 @@ const ShoppingPage = () => {
           <h2>구매가 완료되었습니다!</h2>
           <div className="modal-buttons">
             <button className="confirm-button" onClick={() => navigate('/purchase-history')}>
-              확인
+              구매내역으로 이동
             </button>
             <button className="cancel-button" onClick={() => setPurchaseSuccess(false)}>
               닫기
