@@ -58,7 +58,6 @@ const ShoppingPage = () => {
     setModalCallback(() => callback);
   };
 
-
   const handleAddToCart = async (product) => {
     showModal('장바구니에 추가하시겠습니까?', async () => {
       try {
@@ -102,6 +101,7 @@ const ShoppingPage = () => {
       }
     });
   };
+
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
   };
@@ -110,11 +110,13 @@ const ShoppingPage = () => {
     const results = items.filter(item => item.name.toLowerCase().includes(searchTerm.toLowerCase()));
     setSearchResults(results);
   };
+
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       handleSearchSubmit();
     }
   };
+
   useEffect(() => {
     const fetchItems = async () => {
       try {
@@ -132,7 +134,7 @@ const ShoppingPage = () => {
 
     fetchItems();
   }, []);
-  
+
   if (!isLoggedIn) {
     return <LoginPage />;
   }
@@ -150,22 +152,22 @@ const ShoppingPage = () => {
       <div className="overlay">
         <header className="header">
           <h1 className="shop-title" onClick={() => navigate('/')}>Welcome to Xandar</h1>
+          <div className="search-container">
+            <input
+              type="text"
+              placeholder="아이템 이름을 검색하세요"
+              value={searchTerm}
+              onChange={handleSearchChange}
+              onKeyPress={handleKeyPress}
+              className="search-input"
+            />
+            <button onClick={handleSearchSubmit} className="search-button">검색하기</button>
+          </div>
           <div className="icons">
             <img src={userIcon} alt="User" onClick={handleUserClick} className="icon" />
             <img src={cartIcon} alt="Cart" onClick={handleCartClick} className="icon" />
           </div>
         </header>
-        <div className="search-container">
-          <input
-            type="text"
-            placeholder="아이템 이름을 검색하세요"
-            value={searchTerm}
-            onChange={handleSearchChange}
-            onKeyPress={handleKeyPress}
-            className="search-input"
-          />
-          <button onClick={handleSearchSubmit} className="search-button">검색하기</button>
-        </div>
 
         <div className="products-container">
           <div className="products">
