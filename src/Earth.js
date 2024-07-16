@@ -132,7 +132,7 @@ function Earth() {
             textTransform: 'uppercase',
             letterSpacing: '2px',
             transition: '0.3s',
-            boxShadow: '0 0 10px #0df, 0 0 20px #0df, 0 0 30px #0df',
+            boxShadow: '0 0 px #0df, 0 0 20px #0df, 0 0 30px #0df',
           }}
           onClick={handleRotate}
         >
@@ -170,10 +170,10 @@ function Earth() {
       <button
           style={{
             position: 'absolute',
-            bottom: '87%',
-            left: '90%',
+            bottom: '78%',
+            left: '82%',
             //transform: 'translate(-50%, 0%)',
-            padding: '20px 70px',
+            padding: '10px 89px',
             fontSize: '18px',
             backgroundColor: '#0f0f0f',
             color: '#0df',
