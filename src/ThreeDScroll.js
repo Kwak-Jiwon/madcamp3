@@ -21,7 +21,7 @@ const Model = forwardRef((props, ref) => {
   // 씬을 순회하여 모든 메쉬의 재질을 설정합니다.
   scene.traverse((child) => {
     if (child.isMesh) {
-      child.material = new MeshStandardMaterial({ color: 0x888888, roughness: 0.5, metalness: 0.5 });
+      child.material = new MeshStandardMaterial({ color: 0x555555, roughness: 0.7, metalness: 1 });
     }
   });
 
@@ -89,7 +89,7 @@ const ThreeDScroll = () => {
         <ambientLight intensity={0.5} />
         <directionalLight position={[10, 10, 5]} intensity={7} />
         <pointLight position={[-10, -10, 10]} intensity={3} />
-        <hemisphereLight skyColor={0xffffbb} groundColor={0x080820} intensity={0.8} />
+        <hemisphereLight skyColor={0xffffbb} groundColor={0x080820} intensity={0.9} />
         
         {/* 회전하고 이동하는 모델 컴포넌트를 추가합니다. */}
         <RotatingAndMovingModel />
