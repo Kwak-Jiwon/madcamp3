@@ -101,7 +101,7 @@ const ItemDetail = () => {
         <img src={item.item_image_url} alt={item.name} className="item-image" />
         <div className="item-info">
           <h1>{item.name}</h1>
-          <p>Price: ${item.price.toLocaleString()}</p>
+          <p>Price: U {item.price.toLocaleString()}</p>
           <p>{item.description1}</p>
           <div className="button-container">
             <button className="buy-now-button" onClick={handleBuyNow}>구매하기</button>
