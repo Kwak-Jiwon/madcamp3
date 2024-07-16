@@ -28,6 +28,8 @@
   height: 100vh; /* 높이를 100%로 설정 */
   pointer-events: none; /* 포인터 이벤트 비활성화 */
   z-index: -1; /* z-index를 -1로 설정 */
+  background: url('./back.png') no-repeat center center fixed; /* 배경 이미지 설정 */
+  background-size: cover; /* 배경 이미지 크기 설정 */
 }
 
 canvas {
