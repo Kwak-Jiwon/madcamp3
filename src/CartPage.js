@@ -76,6 +76,25 @@ const CartPage = () => {
     }
   };
 
+  const handleRemoveItem = async (itemId) => {
+    try {
+      const response = await axios.post('http://43.200.215.241:2000/cart/remove-item', {
+        userid: userId,
+        itemid: itemId,
+      });
+
+      if (response.data.status === 'success') {
+        setCartItems((prevItems) =>
+          prevItems.filter((item) => item.itemid !== itemId)
+        );
+      } else {
+        alert(response.data.message);
+      }
+    } catch (error) {
+      alert('Error removing item from cart');
+    }
+  };
+
   const handlePurchase = async () => {
     if (checkedItems.length === 0) {
       alert('구매할 아이템을 선택해주세요.');
@@ -152,6 +171,7 @@ const CartPage = () => {
                     onBlur={(e) => handleQuantityBlur(item.itemid, parseInt(e.target.value))}
                   />
                   <span>개</span>
+                  <button onClick={() => handleRemoveItem(item.itemid)}>삭제</button>
                 </label>
               </li>
             ))}

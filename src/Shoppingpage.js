@@ -8,6 +8,7 @@ import userIcon from './assets/person.svg';
 import cartIcon from './assets/cart.svg';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Modal from 'react-modal';
 
 const RotatingStar = () => {
   const { scene } = useGLTF('/star.glb');
@@ -31,7 +32,10 @@ const ShoppingPage = () => {
 
   const [showUserModal, setShowUserModal] = useState(false);
   const [showCartModal, setShowCartModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
+  const [modalCallback, setModalCallback] = useState(null);
   const [checkedItems, setCheckedItems] = useState([]);
+  const [purchaseSuccess, setPurchaseSuccess] = useState(false);
 
   const handleUserClick = () => {
     setShowUserModal(true);
@@ -47,26 +51,30 @@ const ShoppingPage = () => {
     setShowCartModal(false);
   };
 
+  const showModal = (message, callback) => {
+    setModalMessage(message);
+    setModalCallback(() => callback);
+  };
+
   const handleAddToCart = async (product) => {
-    const confirmAddToCart = window.confirm('장바구니에 추가하시겠습니까?');
-    if (!confirmAddToCart) return;
+    showModal('장바구니에 추가하시겠습니까?', async () => {
+      try {
+        const response = await axios.post('http://43.200.215.241:2000/cart/add', {
+          userid: userId,
+          itemid: product.itemid,
+          itemcnt: 1 // 기본 수량을 1로 설정
+        });
 
-    try {
-      const response = await axios.post('http://43.200.215.241:2000/cart/add', {
-        userid: userId,
-        itemid: product.itemid,
-        itemcnt: 1 // 기본 수량을 1로 설정
-      });
-
-      if (response.data.status === 'success') {
-        alert('장바구니에 추가되었습니다!');
-        setCartItems([...cartItems, product.name]);
-      } else {
-        setError(response.data.message);
+        if (response.data.status === 'success') {
+          showModal('장바구니에 추가되었습니다!', () => {});
+          setCartItems([...cartItems, product.name]);
+        } else {
+          showModal(response.data.message, () => {});
+        }
+      } catch (error) {
+        showModal('아이템 추가 중 오류 발생', () => {});
       }
-    } catch (error) {
-      setError('Error adding item to cart');
-    }
+    });
   };
 
   const handleProductClick = (itemId) => {
@@ -74,24 +82,22 @@ const ShoppingPage = () => {
   };
 
   const handleBuyNow = async (itemId) => {
-    const confirmPurchase = window.confirm('구매하시겠습니까?');
-    if (!confirmPurchase) return;
+    showModal('구매하시겠습니까?', async () => {
+      try {
+        const response = await axios.post('http://43.200.215.241:2000/cart/purchase-selected', {
+          userid: userId,
+          items: [{ itemid: itemId, itemcnt: 1 }]
+        });
 
-    try {
-      const response = await axios.post('http://43.200.215.241:2000/cart/purchase-selected', {
-        userid: userId,
-        items: [{ itemid: itemId, itemcnt: 1 }]
-      });
-
-      if (response.data.status === 'success') {
-        alert('Purchase successful!');
-        navigate('/purchase-history');
-      } else {
-        alert(response.data.message);
+        if (response.data.status === 'success') {
+          setPurchaseSuccess(true);
+        } else {
+          showModal(response.data.message, () => {});
+        }
+      } catch (error) {
+        showModal('구매 중 오류 발생', () => {});
       }
-    } catch (error) {
-      alert('Error purchasing item');
-    }
+    });
   };
 
   useEffect(() => {
@@ -104,7 +110,7 @@ const ShoppingPage = () => {
           setError(response.data.message);
         }
       } catch (error) {
-        setError('Error fetching items');
+        setError('아이템 불러오기 중 오류 발생');
       }
     };
 
@@ -182,6 +188,37 @@ const ShoppingPage = () => {
             </div>
           </div>
         </div>
+      )}
+
+      {modalMessage && (
+        <Modal isOpen={true} onRequestClose={() => setModalMessage('')} className="modal" overlayClassName="overlay">
+          <h2>{modalMessage}</h2>
+          <div className="modal-buttons">
+            <button className="confirm-button" onClick={() => {
+              setModalMessage('');
+              if (modalCallback) modalCallback();
+            }}>
+              확인
+            </button>
+            <button className="cancel-button" onClick={() => setModalMessage('')}>
+              닫기
+            </button>
+          </div>
+        </Modal>
+      )}
+
+      {purchaseSuccess && (
+        <Modal isOpen={true} onRequestClose={() => setPurchaseSuccess(false)} className="modal" overlayClassName="overlay">
+          <h2>구매가 완료되었습니다!</h2>
+          <div className="modal-buttons">
+            <button className="confirm-button" onClick={() => navigate('/purchase-history')}>
+              확인
+            </button>
+            <button className="cancel-button" onClick={() => setPurchaseSuccess(false)}>
+              닫기
+            </button>
+          </div>
+        </Modal>
       )}
     </div>
   );

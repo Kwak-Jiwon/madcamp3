@@ -15,7 +15,6 @@ const ItemDetail = () => {
   const [modalMessage, setModalMessage] = useState('');
   const [modalAction, setModalAction] = useState(null);
 
-
   useEffect(() => {
     const fetchItem = async () => {
       try {
@@ -32,6 +31,7 @@ const ItemDetail = () => {
 
     fetchItem();
   }, [itemId]);
+
   const openModal = (message, action) => {
     setModalMessage(message);
     setModalAction(() => action);
@@ -43,25 +43,6 @@ const ItemDetail = () => {
   };
 
   const handleBuyNow = async () => {
-    // const confirmPurchase = window.confirm('구매하시겠습니까?');
-    // if (!confirmPurchase) return;
-
-    // try {
-    //   const response = await axios.post('http://43.200.215.241:2000/cart/purchase-selected', {
-    //     userid: userId,
-    //     items: [{ itemid: itemId, itemcnt: 1 }]
-    //   });
-
-    //   if (response.data.status === 'success') {
-    //     alert('Purchase successful!');
-    //     navigate('/purchase-history');
-    //   } else {
-    //     alert(response.data.message);
-    //   }
-    // } catch (error) {
-    //   alert('Error purchasing item');
-    // }
-
     openModal('구매하시겠습니까?', async () => {
       try {
         const response = await axios.post('http://43.200.215.241:2000/cart/purchase-selected', {
@@ -78,30 +59,9 @@ const ItemDetail = () => {
         openModal('Error purchasing item', null);
       }
     });
-
-    
   };
 
   const handleAddToCart = async () => {
-    // const confirmAddToCart = window.confirm('장바구니에 추가하시겠습니까?');
-    // if (!confirmAddToCart) return;
-
-    // try {
-    //   const response = await axios.post('http://43.200.215.241:2000/cart/add', {
-    //     userid: userId,
-    //     itemid: itemId,
-    //     itemcnt: 1 // 기본 수량을 1로 설정
-    //   });
-
-    //   if (response.data.status === 'success') {
-    //     alert('장바구니에 추가되었습니다!');
-    //   } else {
-    //     alert(response.data.message);
-    //   }
-    // } catch (error) {
-    //   alert('Error adding item to cart');
-    // }
-
     openModal('장바구니에 추가하시겠습니까?', async () => {
       try {
         const response = await axios.post('http://43.200.215.241:2000/cart/add', {
@@ -119,7 +79,6 @@ const ItemDetail = () => {
         openModal('Error adding item to cart', null);
       }
     });
-
   };
 
   if (error) {
@@ -147,8 +106,10 @@ const ItemDetail = () => {
 
       <Modal isOpen={modalIsOpen} onRequestClose={closeModal} className="modal" overlayClassName="overlay">
         <h2>{modalMessage}</h2>
-        <button onClick={modalAction} className="confirm-button">확인</button>
-        <button onClick={closeModal} className="cancel-button">취소</button>
+        <div className="modal-buttons">
+          <button onClick={modalAction} className="confirm-button">확인</button>
+          <button onClick={closeModal} className="cancel-button">취소</button>
+        </div>
       </Modal>
     </div>
   );
