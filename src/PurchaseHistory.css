@@ -1,0 +1,99 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .history-page {
+    padding: 2rem;
+    background-color: rgba(0, 0, 0, 0.7); /* 투명한 검정색 배경 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+    box-sizing: border-box;
+    overflow-y: auto; /* 세로 스크롤 활성화 */
+  }
+  
+  h2 {
+    color: #ffffff; /* 하얀색 텍스트 */
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    text-shadow: 0 0 0.5rem #00bfff, 0 0 1rem #00bfff; /* 약한 네온 효과 */
+  }
+  
+  .error {
+    color: red;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+    max-width: 75rem; /* 중앙에 고정된 최대 너비 */
+  }
+  
+  .history-item {
+    background-color: rgba(255, 255, 255, 0.1); /* 반투명 배경 */
+    color: white;
+    padding: 2rem;
+    border: 1px solid rgba(0, 191, 255, 0.3); /* 파란색 테두리 */
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  
+  .history-item:hover {
+    transform: scale(1.05);
+    border-color: rgba(0, 191, 255, 0.6); /* 호버 시 테두리 색상 변경 */
+  }
+  
+  .history-item-image {
+    width: 50px;
+    height: 50px;
+    margin-right: 1rem;
+    border-radius: 0.5rem;
+  }
+  
+  .history-item span {
+    flex: 1;
+    text-align: center; /* 텍스트 중앙 정렬 */
+  }
+  
+  button {
+    padding: 1rem 2rem;
+    background-color: #00bfff; /* 파란색 버튼 */
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s;
+    margin-top: 2rem;
+  }
+  
+  button:hover {
+    background-color: #009acd;
+  }
+  
+  /* Custom scrollbar styles */
+  .history-page::-webkit-scrollbar {
+    width: 1.2rem;
+  }
+  
+  .history-page::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 0.6rem;
+  }
+  
+  .history-page::-webkit-scrollbar-thumb {
+    background: rgba(0, 191, 255, 0.1); /* 투명도 70% */
+    border-radius: 0.6rem;
+  }
+  
+  .history-page::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 154, 205, 0.3); /* 투명도 70% */
+  }
+  

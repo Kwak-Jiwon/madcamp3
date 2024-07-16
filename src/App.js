@@ -5,6 +5,8 @@ import ThreeDScroll from './ThreeDScroll';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 import Earth from './Earth';
 import ShoppingPage from './ShoppingPage'; // 정확한 파일 이름 사용
+import CartPage from './CartPage'; // 새로운 CartPage 컴포넌트 추가
+import PurchaseHistory from './PurchaseHistory.js';
 import { AuthProvider } from './AuthContext';
 import { useAuth } from './AuthContext';
 import ItemDetail from './ItemDetail';
@@ -27,6 +29,7 @@ function MainPage() {
         <div className="scroll-container">
           <button className='button1' onClick={handleNavigateToEarth}>NEED MORE CASH</button>
           <button className='button2' onClick={handleNavigateToShop}>SHOP NOW</button>
+          
             </div>
       </div>
     </div>
@@ -42,6 +45,8 @@ function App() {
           <Route path="/earth" element={<Earth />} />
           <Route path="/shoppingpage" element={<ShoppingPage />} />
           <Route path="/items/:itemId" element={<ItemDetail />} /> {/* 상세 페이지 라우트 추가 */}
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/purchase-history" element={<PurchaseHistory/>}/>
         </Routes>
       </Router>
     </AuthProvider>

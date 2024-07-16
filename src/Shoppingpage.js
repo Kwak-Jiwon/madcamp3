@@ -38,9 +38,26 @@ const ShoppingPage = () => {
     setShowCartModal(false); // 유저 모달을 열 때 카트 모달을 닫음
   };
 
-  const handleCartClick = () => {
-    setShowCartModal(true);
-    setShowUserModal(false); // 카트 모달을 열 때 유저 모달을 닫음
+  const handleCartClick = async () => {
+    navigate('/cart');
+
+    // setShowCartModal(true);
+    // setShowUserModal(false); // 카트 모달을 열 때 유저 모달을 닫음
+
+    // try {
+    //   const response = await axios.get('http://43.200.215.241:2000/cart', {
+    //     params: { userid: userId }
+    //   });
+      
+    //   if (response.data.status === 'success') {
+    //     setCartItems(response.data.data);
+    //   } else {
+    //     setError(response.data.message);
+    //   }
+    // } catch (error) {
+    //   setError('Error fetching cart items');
+    // }
+
   };
 
   const handleCloseModal = () => {
@@ -48,8 +65,25 @@ const ShoppingPage = () => {
     setShowCartModal(false);
   };
 
-  const handleAddToCart = (product) => {
-    setCartItems([...cartItems, product]);
+  const handleAddToCart =async (product) => {
+ //   setCartItems([...cartItems, product]);
+      try{
+        const response=await axios.post('http://43.200.215.241:2000/cart/add',{
+          userid: userId,
+          itemid: product.itemid,
+          itemcnt: 1 // 기본 수량을 1로 설정
+        });
+      
+      if (response.data.status === 'success') {
+        setCartItems([...cartItems, product.name]);
+      } else {
+        setError(response.data.message);
+      }
+    } catch (error) {
+      setError('Error adding item to cart');
+    }
+
+
   };
 
   const handleCheckboxChange = (product) => {
@@ -59,10 +93,29 @@ const ShoppingPage = () => {
         : [...prev, product]
     );
   };
+  const itemhistory=()=>{
+    navigate('/purchase-history');
+  }
+  const handleProductClick = (itemId) => {
+    navigate(`/items/${itemId}`);
+  };
+  const handleRemoveFromCart = async () => {
+    const itemsToRemove = checkedItems.map((item) => ({ itemid: item.itemid, itemcnt: 1 }));
+    try {
+      const response = await axios.post('http://43.200.215.241:2000/cart/remove', {
+        userid: userId,
+        items: itemsToRemove
+      });
 
-  const handleRemoveFromCart = () => {
-    setCartItems(cartItems.filter((item) => !checkedItems.includes(item)));
-    setCheckedItems([]);
+      if (response.data.status === 'success') {
+        setCartItems(cartItems.filter((item) => !checkedItems.includes(item)));
+        setCheckedItems([]);
+      } else {
+        setError(response.data.message);
+      }
+    } catch (error) {
+      setError('Error removing items from cart');
+    }
   };
 
   useEffect(() => {
@@ -111,13 +164,13 @@ const ShoppingPage = () => {
         <div className="products-container">
           <div className="products">
             {items.map(item => (
-              <div className={`product product-${item.itemid % 2 === 0 ? 'even' : 'odd'}`} key={item.itemid}>
+              <div className={`product product-${item.itemid % 2 === 0 ? 'even' : 'odd'}`} key={item.itemid} onClick={() => handleProductClick(item.itemid)} onClick={() => handleProductClick(item.itemid)}>
                 <h2>{item.name}</h2>
                 <p>Price: U {item.price.toLocaleString()}</p>
                 <img src={item.item_image_url} alt={item.name} />
                 <div className="button-container">
-                  <button onClick={() => handleBuyNow(item.itemid)}>Buy Now</button>
-                  <button onClick={() => handleAddToCart(item.name)}>Add to Cart</button>
+                  <button onClick={(e) => {e.stopPropagation(); handleBuyNow(item.itemid)}}>Buy Now</button>
+                  <button onClick={(e) => {e.stopPropagation(); handleAddToCart(item);}}>Add to Cart</button>
                 </div>
               </div>
             ))}
@@ -132,14 +185,14 @@ const ShoppingPage = () => {
             <h2>User Information</h2>
             <p>{userId}으로 로그인 중</p>
             <div className="modal-buttons">
-              <button>주문내역</button>
+              <button onClick={itemhistory}>주문내역</button>
               <button className="logout-button" onClick={logout}>Logout</button>
             </div>
           </div>
         </div>
       )}
 
-      {showCartModal && (
+      {/* {showCartModal && (
         <div className="modal">
           <div className="modal-content">
             <span className="close" onClick={handleCloseModal}>&times;</span>
@@ -154,7 +207,7 @@ const ShoppingPage = () => {
                         checked={checkedItems.includes(item)}
                         onChange={() => handleCheckboxChange(item)}
                       />
-                      {item}
+                      {item.name}-{item.itemcnt} 개 
                     </li>
                   ))}
                 </ul>
@@ -165,7 +218,7 @@ const ShoppingPage = () => {
             )}
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };
