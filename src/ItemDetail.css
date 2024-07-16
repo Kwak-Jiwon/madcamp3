@@ -1,85 +1,131 @@
+/* ItemDetail.css */
 .item-detail-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem;
-    background-color: rgba(0, 0, 0, 0.7); /* 투명한 검정색 배경 */
-    color: white;
-    min-height: 100vh;
-  }
-  
-  .item-detail {
-    display: flex;
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
-    border-radius: 1rem;
-    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5); /* 약한 그림자 효과 */
-    overflow: hidden;
-    max-width: 50rem; /* 최대 너비 800px */
-    width: 100%;
-    backdrop-filter: blur(1rem); /* 배경 흐림 효과 */
-  }
-  
-  .item-image {
-    width: 50%;
-    height: auto;
-    object-fit: cover;
-  }
-  
-  .item-info {
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    flex: 1;
-  }
-  
-  .item-info h1 {
-    color: #00bfff; /* 파란색 테마 */
-    text-shadow: 0 0 0.5rem #00bfff, 0 0 1rem #00bfff; /* 약한 네온 효과 */
-  }
-  
-  .item-info p {
-    margin: 1rem 0;
-  }
-  
-  .button-container {
-    display: flex;
-    gap: 1rem;
-  }
-  
-  .buy-now-button {
-    padding: 1rem 2rem;
-    background-color: #00bfff; /* 파란색 버튼 */
-    border: none;
-    color: white;
-    cursor: pointer;
-    border-radius: 0.5rem;
-    transition: background-color 0.2s;
-    flex: 1;
-    text-align: center;
-  }
-  
-  .buy-now-button:hover {
-    background-color: #009acd;
-  }
-  
-  /* Custom scrollbar styles */
-  .item-detail::-webkit-scrollbar {
-    width: 1.2rem;
-  }
-  
-  .item-detail::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 0.6rem;
-  }
-  
-  .item-detail::-webkit-scrollbar-thumb {
-    background: rgba(0, 191, 255, 0.1); /* 투명도 70% */
-    border-radius: 0.6rem;
-  }
-  
-  .item-detail::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 154, 205, 0.3); /* 투명도 70% */
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background-color: rgba(0, 0, 0, 0.9); /* 더 어두운 투명한 검정색 배경 */
+  color: white;
+  min-height: 100vh;
+}
+
+.item-detail {
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  border-radius: 1rem;
+  box-shadow: 0 0 2rem rgba(0, 0, 0, 0.7); /* 더 강한 그림자 효과 */
+  overflow: hidden;
+  max-width: 50rem; /* 최대 너비 800px */
+  width: 100%;
+  backdrop-filter: blur(1.5rem); /* 더 강한 배경 흐림 효과 */
+}
+
+.item-image {
+  width: 50%;
+  height: auto;
+  object-fit: cover;
+}
+
+.item-info {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.item-info h1 {
+  color: #00bfff; /* 파란색 테마 */
+  text-shadow: 0 0 0.7rem #00bfff, 0 0 1.5rem #00bfff; /* 더 강한 네온 효과 */
+}
+
+.item-info p {
+  margin: 1rem 0;
+}
+
+.button-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.buy-now-button {
+  padding: 1rem 2rem;
+  background-color: #00bfff; /* 파란색 버튼 */
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s, transform 0.2s; /* 호버 시 배경색과 크기 변환 */
+  flex: 1;
+  text-align: center;
+}
+
+.buy-now-button:hover {
+  background-color: #009acd;
+  transform: scale(1.05); /* 호버 시 살짝 확대 */
+}
+
+/* Custom scrollbar styles */
+.item-detail::-webkit-scrollbar {
+  width: 1.2rem;
+}
+
+.item-detail::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 0.6rem;
+}
+
+.item-detail::-webkit-scrollbar-thumb {
+  background: rgba(0, 191, 255, 0.3); /* 투명도 70% */
+  border-radius: 0.6rem;
+}
+
+.item-detail::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 154, 205, 0.6); /* 투명도 70% */
+}
+
+.confirm-button,
+.cancel-button {
+  padding: 1rem 2rem;
+  background-color: #00bfff;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s, transform 0.2s; /* 호버 시 배경색과 크기 변환 */
+  margin: 0 1rem;
+  flex: 1;
+  text-align: center;
+}
+
+.confirm-button:hover,
+.cancel-button:hover {
+  background-color: #009acd;
+  transform: scale(1.05); /* 호버 시 살짝 확대 */
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.9); /* 어두운 투명한 검정색 배경 */
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 2rem rgba(0, 0, 0, 0.7); /* 더 강한 그림자 효과 */
+  text-align: center;
+  color: #fff; /* 흰색 글자 */
+  max-width: 30rem; /* 최대 너비 480px */
+  width: 100%;
+  backdrop-filter: blur(1.5rem); /* 더 강한 배경 흐림 효과 */
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7); /* 투명한 검정색 배경 */
+}

@@ -18,7 +18,7 @@ body {
   box-sizing: border-box;
   overflow-y: auto; /* 세로 스크롤 활성화 */
 }
-
+ 
 .shop-title {
   color: #ffffff; /* 하얀색 텍스트 */
   text-align: center;
@@ -58,25 +58,26 @@ body {
   flex-wrap: wrap;
   gap: 2rem;
   justify-content: center;
-  max-width: 75rem; /* 중앙에 고정된 최대 너비 */
+  max-width: 85em; /* 중앙에 고정된 최대 너비 */
 }
 
 .product {
   background-color: rgba(255, 255, 255, 0.1); /* 반투명 배경 */
   color: white;
-  padding: 2rem;
+  /* padding: 2rem; */
   border: 1px solid rgba(0, 191, 255, 0.3); /* 파란색 테두리 */
   border-radius: 1rem;
   text-align: center;
   transition: transform 0.2s, border-color 0.2s;
-  width: calc(33.333% - 2rem); /* 3등분으로 너비 설정 */
+  width: calc(20% - 2rem); /* 3등분으로 너비 설정 */
+ 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
 .product:hover {
-  transform: scale(1.05);
+  /* transform: scale(1.05); */
   border-color: rgba(0, 191, 255, 0.6); /* 호버 시 테두리 색상 변경 */
 }
 
@@ -98,10 +99,14 @@ body {
 }
 
 .product button {
-  padding: 1rem 2rem;
-  background-color: #00bfff; /* 파란색 버튼 */
-  border: none;
+  background-color: rgba(255, 255, 255, 0.1); /* 반투명 배경 */
   color: white;
+  /* padding: 2rem; */
+  border: 1px solid rgba(0, 191, 255, 0.3); /* 파란색 테두리 */
+  padding: 1rem 2rem;
+  /* background-color: #00bfff; 파란색 버튼 */
+  border: none;
+  /* color: white; */
   cursor: pointer;
   border-radius: 0.5rem;
   transition: background-color 0.2s;
@@ -109,7 +114,7 @@ body {
 }
 
 .product button:hover {
-  background-color: #009acd;
+  background-color: #4fdaf3;
 }
 
 /* Custom scrollbar styles */
@@ -172,7 +177,7 @@ body {
 
 .modal p {
   margin-bottom: 1rem;
-  font-size: 1.2rem;
+  font-size: 3rem;
 }
 
 .modal-buttons {
@@ -215,4 +220,62 @@ body {
   .product {
     width: calc(100% - 2rem); /* 1등분으로 너비 설정 */
   }
+}
+search-input {
+  width: 50%;
+  padding: 0.5rem;
+  margin: 1rem 0;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #00bfff;
+  box-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+}
+/* Add styles for the search input and button */
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.search-input {
+  width: 70%;
+  padding: 1rem;
+  font-size: 1.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-right: 1rem;
+  box-sizing: border-box;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #00bfff;
+  box-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+}
+
+.search-button {
+  width:40%;
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+  background-color: #0c627f;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s;
+  box-sizing: border-box;
+}
+
+.search-button:hover {
+  background-color: #009acd;
 }

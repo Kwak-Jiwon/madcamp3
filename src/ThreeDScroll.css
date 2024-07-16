@@ -1,0 +1,42 @@
+/* ThreeDScroll.css */
+
+.canvas-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: url('./back.avif') no-repeat center center fixed;
+    background-size: cover;
+  }
+  
+  .content-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+  }
+  
+  .scroll-container {
+    pointer-events: all;
+    z-index: 10;
+    position: relative;
+    padding: 20px;
+  }
+  
+  .button1,
+  .button2 {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+  }
+  
