@@ -185,7 +185,7 @@ const CartPage = () => {
               <span>가격</span>
               <span>수량</span>
             </div>
-            <ul>
+            <ul className="cart-list">
               {cartItems.map((item, index) => (
                 <li key={index} className="cart-item">
                   <input
@@ -196,22 +196,24 @@ const CartPage = () => {
                   <img src={item.item_image_url} alt={item.name} className="cart-item-image" />
                   <span>{item.name}</span>
                   <span>{item.price.toLocaleString()} Units</span>
-                  <input
-                    type="number"
-                    min="0"
-                    value={item.itemcnt}
-                    onClick={(e) => e.stopPropagation()}
-                    onChange={(e) => handleQuantityChange(item.itemid, parseInt(e.target.value))}
-                    onBlur={(e) => handleQuantityBlur(item.itemid, parseInt(e.target.value))}
-                  />
-                  <span>개</span>
+                  <div className="quantity-container">
+                    <input
+                      type="number"
+                      min="0"
+                      value={item.itemcnt}
+                      onClick={(e) => e.stopPropagation()}
+                      onChange={(e) => handleQuantityChange(item.itemid, parseInt(e.target.value))}
+                      onBlur={(e) => handleQuantityBlur(item.itemid, parseInt(e.target.value))}
+                    />
+                    <span>개</span>
+                  </div>
                   <button onClick={() => handleRemoveItem(item.itemid)}>삭제</button>
                 </li>
               ))}
             </ul>
             <div className="cart-total">
               <span>총 합계</span>
-              <span>{calculateTotal().toLocaleString()}원</span>
+              <span>{calculateTotal().toLocaleString()} Units</span>
             </div>
             <button onClick={handlePurchase}>선택한 아이템 구매하기</button>
           </div>
