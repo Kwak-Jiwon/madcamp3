@@ -38,6 +38,7 @@ const ShoppingPage = () => {
   const [modalCallback, setModalCallback] = useState(null);
   const [checkedItems, setCheckedItems] = useState([]);
   const [purchaseSuccess, setPurchaseSuccess] = useState(false);
+  const [userBalance,setUserBalance]=useState(0);
 
   const handleUserClick = () => {
     setShowUserModal(true);
@@ -97,7 +98,7 @@ const ShoppingPage = () => {
           showModal(response.data.message, () => {});
         }
       } catch (error) {
-        showModal('구매 중 오류 발생', () => {});
+        showModal('잔액 부족. 돈을 더더더 모아오세요!', () => {});
       }
     });
   };
@@ -131,9 +132,21 @@ const ShoppingPage = () => {
         setError('아이템 불러오기 중 오류 발생');
       }
     };
-
+    const fetchUserBalance = async () => {
+      try {
+        const response = await axios.get('http://43.200.215.241:2000/user-balance', {
+          params: { userid: userId },
+        });
+        if (response.data.status === 'success') {
+          setUserBalance(response.data.balance);
+        }
+      } catch (error) {
+        console.error('Error fetching user balance:', error);
+      }
+    };
     fetchItems();
-  }, []);
+    fetchUserBalance();
+  }, [userId]);
 
   if (!isLoggedIn) {
     return <LoginPage />;
@@ -212,6 +225,8 @@ const ShoppingPage = () => {
             </span>
             <h2>User Information</h2>
             <p>{userId}으로 로그인 중</p>
+            <span><b>나의 유닛</b> {userBalance.toLocaleString()} U</span>
+            <p></p>
             <div className="modal-buttons">
               <button onClick={() => navigate('/purchase-history')}>주문내역</button>
               <button className="logout-button" onClick={logout}>Logout</button>
