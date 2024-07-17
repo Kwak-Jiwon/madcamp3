@@ -28,6 +28,8 @@
   height: 100vh; /* 높이를 100%로 설정 */
   pointer-events: none; /* 포인터 이벤트 비활성화 */
   z-index: -1; /* z-index를 -1로 설정 */
+  background: url('./back.png') no-repeat center center fixed; /* 배경 이미지 설정 */
+  background-size: cover; /* 배경 이미지 크기 설정 */
 }
 
 canvas {
@@ -45,8 +47,8 @@ canvas {
 .button1,
 .button2 {
   position: absolute; /* 절대 위치 설정 */
-  width: 20rem; /* 너비를 20rem으로 설정 */
-  height: 12rem; /* 높이를 12rem으로 설정 */
+  width: 28rem; /* 너비를 20rem으로 설정 */
+  height: 15rem; /* 높이를 12rem으로 설정 */
   background-color: #000000c4; /* 반투명 검정 배경색 설정 */
   color: #ffffff; /* 텍스트 색상 설정 */
   border: 2px solid #000000; /* 테두리 설정 */
@@ -68,7 +70,7 @@ canvas {
 
 .button2 {
   top: 2000px; /* 상단에서 2000px 아래로 */
-  right: 50%; /* 오른쪽에서 50% 왼쪽으로 */
+  right: 70%; /* 오른쪽에서 50% 왼쪽으로 */
   transform: translateX(50%); /* X축 방향으로 50% 이동 */
 }
 

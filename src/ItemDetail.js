@@ -91,12 +91,9 @@ const ItemDetail = () => {
 
   return (
     <div className="item-detail-container">
-      <header className="header">
-        <h1 className="shop-title" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
-          Welcome to Xandar
-        </h1>
-        <div className="icons"></div>
-      </header>
+      <h1 className="welcome-text" onClick={() => navigate('/')}>
+        Welcome to Xandar
+      </h1>
       <div className="item-detail">
         <img src={item.item_image_url} alt={item.name} className="item-image" />
         <div className="item-info">

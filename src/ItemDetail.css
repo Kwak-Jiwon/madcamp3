@@ -1,12 +1,27 @@
-/* ItemDetail.css */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
 .item-detail-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   padding: 2rem;
   background-color: rgba(0, 0, 0, 0.9); /* 더 어두운 투명한 검정색 배경 */
   color: white;
   min-height: 100vh;
+  position: relative;
+}
+
+.welcome-text {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  color: #ffffff; /* 하얀색 텍스트 */
+  font-size: 2rem;
+  text-shadow: 0 0 0.5rem #00bfff, 0 0 1rem #00bfff; /* 약한 네온 효과 */
+  cursor: pointer;
 }
 
 .item-detail {
@@ -19,6 +34,7 @@
   max-width: 50rem; /* 최대 너비 800px */
   width: 100%;
   backdrop-filter: blur(1.5rem); /* 더 강한 배경 흐림 효과 */
+  margin-top: 5rem; /* 상단 간격 추가 */
 }
 
 .item-image {
