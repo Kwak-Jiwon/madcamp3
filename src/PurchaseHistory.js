@@ -39,6 +39,7 @@ const PurchaseHistory = () => {
               <img src={item.item_image_url} alt={item.name} className="history-item-image" />
               <span>{item.name}</span>
               <span>{item.cnt} 개</span>
+              <span>U {item.price*item.cnt}</span>
               <span>{new Date(item.date).toLocaleDateString()}</span>
             </li>
           ))}

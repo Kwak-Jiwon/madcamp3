@@ -1,6 +1,9 @@
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: "IBM Plex Sans KR", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  
 }
 
 .item-detail-container {
@@ -58,6 +61,7 @@ body {
 
 .item-info p {
   margin: 1rem 0;
+  font-size:1.5rem;
 }
 
 .button-container {
@@ -66,15 +70,19 @@ body {
 }
 
 .buy-now-button {
-  padding: 1rem 2rem;
+  padding: 0.7rem 1.4rem;
   background-color: #00bfff; /* 파란색 버튼 */
   border: none;
-  color: white;
+  color: rgb(12, 2, 2);
   cursor: pointer;
   border-radius: 0.5rem;
   transition: background-color 0.3s, transform 0.2s; /* 호버 시 배경색과 크기 변환 */
   flex: 1;
   text-align: center;
+  font-family: "IBM Plex Sans KR", sans-serif;
+  font-weight: 400;
+  font-style: normald;
+  font-size:1rem;
 }
 
 .buy-now-button:hover {
