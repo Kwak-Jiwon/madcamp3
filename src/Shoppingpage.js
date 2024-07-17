@@ -136,7 +136,7 @@ const ShoppingPage = () => {
   }, []);
 
   if (!isLoggedIn) {
-    return <LoginPage />;
+    //return <LoginPage />;
   }
   const filteredItems = items.filter(item => item.name.toLowerCase().includes(searchTerm.toLowerCase()));
 

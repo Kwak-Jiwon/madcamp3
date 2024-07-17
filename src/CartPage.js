@@ -169,7 +169,7 @@ const CartPage = () => {
         <pointLight position={[-10, -10, 10]} intensity={1} />
         <RotatingStar />
       </Canvas>
-      <div className="content">
+      <div className="overlay">
         <header className="header">
           <h1 className="shop-title" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
             Welcome to Xandar
@@ -188,26 +188,24 @@ const CartPage = () => {
             <ul>
               {cartItems.map((item, index) => (
                 <li key={index} className="cart-item">
-                  <label>
-                    <input
-                      type="checkbox"
-                      checked={checkedItems.includes(item.itemid)}
-                      onChange={() => handleCheckboxChange(item.itemid)}
-                    />
-                    <img src={item.item_image_url} alt={item.name} className="cart-item-image" />
-                    <span>{item.name}</span>
-                    <span>{item.price.toLocaleString()}원</span>
-                    <input
-                      type="number"
-                      min="0"
-                      value={item.itemcnt}
-                      onClick={(e) => e.stopPropagation()}
-                      onChange={(e) => handleQuantityChange(item.itemid, parseInt(e.target.value))}
-                      onBlur={(e) => handleQuantityBlur(item.itemid, parseInt(e.target.value))}
-                    />
-                    <span>개</span>
-                    <button onClick={() => handleRemoveItem(item.itemid)}>삭제</button>
-                  </label>
+                  <input
+                    type="checkbox"
+                    checked={checkedItems.includes(item.itemid)}
+                    onChange={() => handleCheckboxChange(item.itemid)}
+                  />
+                  <img src={item.item_image_url} alt={item.name} className="cart-item-image" />
+                  <span>{item.name}</span>
+                  <span>{item.price.toLocaleString()}원</span>
+                  <input
+                    type="number"
+                    min="0"
+                    value={item.itemcnt}
+                    onClick={(e) => e.stopPropagation()}
+                    onChange={(e) => handleQuantityChange(item.itemid, parseInt(e.target.value))}
+                    onBlur={(e) => handleQuantityBlur(item.itemid, parseInt(e.target.value))}
+                  />
+                  <span>개</span>
+                  <button onClick={() => handleRemoveItem(item.itemid)}>삭제</button>
                 </li>
               ))}
             </ul>
@@ -245,25 +243,6 @@ const CartPage = () => {
           </div>
         </Modal>
       </div>
-      <style>
-        {`
-          .background-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-          }
-          .content {
-            position: relative;
-            z-index: 1;
-            padding: 20px;
-            background-color: rgba(0, 0, 0, 0.5); /* Optional: adds a semi-transparent background to the content */
-            border-radius: 10px;
-          }
-        `}
-      </style>
     </div>
   );
 };

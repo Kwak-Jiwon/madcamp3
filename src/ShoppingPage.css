@@ -227,12 +227,12 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 1rem;
-  width: 60%; /* 검색바 컨테이너 너비 */
-  max-width: 1200px; /* 최대 너비 */
+  width: 76%; /* 검색바 컨테이너 너비 */
+  max-width: 900px; /* 최대 너비 */
 }
 
 .search-input {
-  flex: 1;
+  flex: 10;
   padding: 0.5rem 1rem; /* 높이 줄이기 */
   font-size: 1rem;
   border-radius: 0.5rem;
