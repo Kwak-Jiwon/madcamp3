@@ -6,20 +6,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 0; /* Removed padding */
   box-sizing: border-box;
-  overflow-y: auto;
+  overflow: hidden; /* Hide overflow */
   position: relative;
-}
-
-.cart-page h2 {
-  font-size: 2em;
-  text-shadow: 0 0 5px #00bfff, 0 0 10px #00bfff;
-  margin-bottom: 20px;
-}
-
-.error {
-  color: red;
+  margin: 0; /* Ensure no margin */
 }
 
 .header {
@@ -27,18 +18,19 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 1rem 2rem;
+  padding: 0; /* Removed padding */
   box-sizing: border-box;
+  margin: 0; /* Ensure no margin */
 }
 
 .cart-container {
-  width: 80%;
-  background-color: rgba(255, 255, 255, 0.1); /* 반투명 배경 */
-  padding: 20px;
+  width: 100%;
+  max-width: 1200px;
+  background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+  padding: 0; /* Removed padding */
   border-radius: 10px;
   box-shadow: 0 0 10px #0df, 0 0 20px #0df, 0 0 30px #0df;
-  max-width: 1200px;
-  margin: 0 auto;
+  margin: 0; /* Ensure no margin */
 }
 
 .cart-header,
@@ -47,13 +39,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 0;
+  padding: 0; /* Removed padding */
   border-bottom: 1px solid rgba(0, 191, 255, 0.3);
-}
-
-.cart-header {
-  font-weight: bold;
-  border-bottom: 2px solid rgba(0, 191, 255, 0.6);
+  min-width: 900px; /* Set minimum width */
 }
 
 .cart-item {
@@ -102,7 +90,7 @@ button:hover {
   background-color: #009acd;
 }
 
-/* 모달 스타일 */
+/* Modal styles */
 .modal {
   position: fixed;
   top: 50%;
@@ -121,7 +109,7 @@ button:hover {
 }
 
 .overlay {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -133,7 +121,8 @@ button:hover {
   justify-content: flex-start;
   padding: 2rem;
   box-sizing: border-box;
-  overflow-y: auto;
+  overflow-y: auto; /* Enable vertical scrolling */
+  margin: 0; /* Ensure no margin */
 }
 
 .modal-content {

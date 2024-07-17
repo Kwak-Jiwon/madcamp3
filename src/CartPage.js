@@ -3,9 +3,9 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import axios from 'axios';
 import { useAuth } from './AuthContext';
-import './CartPage.css';
 import { useNavigate } from 'react-router-dom';
 import Modal from 'react-modal';
+import './CartPage.css';
 
 const RotatingStar = () => {
   const { scene } = useGLTF('/star.glb');
@@ -195,7 +195,7 @@ const CartPage = () => {
                   />
                   <img src={item.item_image_url} alt={item.name} className="cart-item-image" />
                   <span>{item.name}</span>
-                  <span>{item.price.toLocaleString()}원</span>
+                  <span>{item.price.toLocaleString()} Units</span>
                   <input
                     type="number"
                     min="0"
@@ -219,29 +219,32 @@ const CartPage = () => {
           <p>Your cart is empty</p>
         )}
 
-        <Modal
-          isOpen={purchaseSuccess || isModalOpen}
-          onRequestClose={handleCloseModal}
-          className="modal"
-          overlayClassName="overlay"
-        >
-          <div className="modal-content">
-            <span className="close" onClick={handleCloseModal}>
-              &times;
-            </span>
-            <h2>{purchaseSuccess ? '구매가 완료되었습니다!' : modalMessage}</h2>
-            <div className="modal-buttons">
-              {purchaseSuccess ? (
-                <>
-                  <button onClick={handleViewPurchaseHistory}>구매내역으로 이동</button>
-                  <button onClick={handleCloseModal}>닫기</button>
-                </>
-              ) : (
-                <button onClick={handleCloseModal}>확인</button>
-              )}
+        {isModalOpen && (
+          <Modal
+            isOpen={isModalOpen}
+            onRequestClose={handleCloseModal}
+            contentLabel="Purchase Modal"
+            className="modal"
+            overlayClassName="overlay"
+          >
+            <div className="modal-content">
+              <span className="close" onClick={handleCloseModal}>
+                &times;
+              </span>
+              <h2>{purchaseSuccess ? '구매가 완료되었습니다!' : modalMessage}</h2>
+              <div className="modal-buttons">
+                {purchaseSuccess ? (
+                  <>
+                    <button onClick={handleViewPurchaseHistory}>구매내역으로 이동</button>
+                    <button onClick={handleCloseModal}>닫기</button>
+                  </>
+                ) : (
+                  <button onClick={handleCloseModal}>확인</button>
+                )}
+              </div>
             </div>
-          </div>
-        </Modal>
+          </Modal>
+        )}
       </div>
     </div>
   );

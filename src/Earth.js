@@ -1,16 +1,11 @@
-// React와 필요한 훅(useRef, useState)을 불러옵니다.
-import React, { useRef, useState,useEffect } from 'react';
-
-// @react-three/fiber에서 Canvas와 useFrame을 불러옵니다. Canvas는 3D 씬을 렌더링하고, useFrame은 매 프레임마다 호출되는 함수입니다.
+import React, { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-
-// @react-three/drei에서 OrbitControls와 useGLTF를 불러옵니다. OrbitControls는 3D 씬의 카메라 제어를 도와주고, useGLTF는 GLTF 파일을 불러옵니다.
 import { OrbitControls, useGLTF } from '@react-three/drei';
-
-// 사용자 인증을 위한 커스텀 훅과 로그인 페이지 컴포넌트를 불러옵니다.
 import { useAuth } from './AuthContext';
 import LoginPage from './LoginPage';
 import axios from 'axios';
+import Modal from 'react-modal';
+import { useNavigate } from 'react-router-dom';
 
 // 지구 모델 컴포넌트를 정의합니다. rotationSpeed를 prop으로 받습니다.
 function EarthModel({ rotationSpeed }) {
@@ -37,12 +32,11 @@ function Earth() {
   // 회전 속도와 클릭 횟수를 상태로 관리합니다.
   const [rotationSpeed, setRotationSpeed] = useState(0);
   const [clickCount, setClickCount] = useState(0);
-  const [totalMoney,setTotalMoney]=useState(0);
-
-  const [moneyUpdated, setMoneyUpdated] = useState(false); // 돈이 업데이트되었는지 여부를 추적
-
-  // 사용자 인증 상태를 가져옵니다.
-  const { isLoggedIn,userId, setIsLoggedIn } = useAuth();
+  const [totalMoney, setTotalMoney] = useState(0);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
+  const { isLoggedIn, userId } = useAuth();
+  const navigate=useNavigate();
 
   // 지구 회전을 처리하는 함수입니다.
   const handleRotate = () => {
@@ -57,6 +51,7 @@ function Earth() {
     // 클릭 횟수를 증가시킵니다.
     setClickCount(prevCount => prevCount + 1);
   };
+
   const handleAddMoney = async () => {
     try {
       const response = await axios.post('http://43.200.215.241:2000/add-money', {
@@ -66,30 +61,23 @@ function Earth() {
 
       if (response.data.status === 'success') {
         setTotalMoney(response.data.currentMoney);
-        setMoneyUpdated(true); // 돈이 업데이트되었음을 표시
-        setClickCount(0); // 클릭 횟수를 리셋합니다.
+        setModalMessage(`Total Money: ${response.data.currentMoney}`);
+        setModalIsOpen(true);
+        setClickCount(0);
       } else {
-        alert(response.data.message);
+        setModalMessage(response.data.message);
+        setModalIsOpen(true);
       }
     } catch (error) {
       console.error('Error adding money:', error);
-      alert('Error adding money');
+      setModalMessage('Error adding money');
+      setModalIsOpen(true);
     }
   };
-      // // totalMoney가 업데이트될 때마다 alert를 표시합니다.
-      // useEffect(() => {
-      //   if (totalMoney !== null) {
-      //     alert(`Total Money: ${totalMoney}`);
-      //   }
-      // }, [totalMoney]);
 
-        // moneyUpdated가 true일 때만 alert를 표시합니다.
-  useEffect(() => {
-    if (moneyUpdated) {
-      alert(`Total Money: ${totalMoney}`);
-      setMoneyUpdated(false); // 알림 후 다시 false로 설정
-    }
-  }, [moneyUpdated, totalMoney]);
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
 
   // 전체 화면을 차지하는 div를 렌더링합니다.
   return (
@@ -110,6 +98,13 @@ function Earth() {
         {/* OrbitControls 컴포넌트를 추가하여 카메라 제어를 가능하게 합니다. */}
         <OrbitControls enableZoom={false} />
       </Canvas>
+
+      <header className="header">
+        <h1 className="shop-title" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
+          Welcome to Xandar
+        </h1>
+        <div className="icons"></div>
+      </header>
 
       {/* 사용자가 로그인되어 있지 않으면 로그인 페이지를 렌더링합니다. */}
       {!isLoggedIn && <LoginPage />}
@@ -132,7 +127,7 @@ function Earth() {
             textTransform: 'uppercase',
             letterSpacing: '2px',
             transition: '0.3s',
-            boxShadow: '0 0 px #0df, 0 0 20px #0df, 0 0 30px #0df',
+            boxShadow: '0 0 10px #0df, 0 0 20px #0df, 0 0 30px #0df',
           }}
           onClick={handleRotate}
         >
@@ -172,7 +167,6 @@ function Earth() {
             position: 'absolute',
             bottom: '78%',
             left: '82%',
-            //transform: 'translate(-50%, 0%)',
             padding: '10px 89px',
             fontSize: '18px',
             backgroundColor: '#0f0f0f',
@@ -189,7 +183,19 @@ function Earth() {
         >
           저금하기
         </button>
-      {/* 스타일을 정의합니다. */}
+
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        className="modal"
+        overlayClassName="overlay"
+      >
+        <h2>{modalMessage}</h2>
+        <div className="modal-buttons">
+          <button onClick={closeModal} className="confirm-button">확인</button>
+        </div>
+      </Modal>
+
       <style>
         {`
           /* 버튼에 호버 효과를 추가합니다. */
@@ -200,6 +206,54 @@ function Earth() {
           /* 정보 상자에 호버 효과를 추가합니다. */
           .info-box:hover {
             opacity: 1;
+          }
+
+          /* 모달 스타일 */
+          .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            width: 90%;
+            max-width: 30rem;
+            text-align: center;
+          }
+
+          .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+          }
+
+          .modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+          }
+
+          .confirm-button {
+            padding: 0.5rem 1rem;
+            background-color: #00bfff;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 0.5rem;
+            transition: background-color 0.2s;
+          }
+
+          .confirm-button:hover {
+            background-color: #009acd;
           }
         `}
       </style>
